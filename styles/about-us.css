@@ -1,0 +1,41 @@
+.wrapper-about-us {
+  margin-top: 20px;
+}
+
+.about-us-text {
+  position: absolute;
+  top: 23%;
+  left: 5%;
+  width: 100%;
+  color: white;
+  width: 600px;
+}
+
+.about-us-text > div > p {
+  font-size: 1.2rem;
+}
+
+.about-us-img {
+  position: relative;
+}
+
+.about-us-btn-wrapper {
+  text-align: center;
+}
+
+.about-us-btn {
+  width: 300px;
+  height: 60px;
+  font-size: 1.3vw;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: bolder;
+  color: #fff;
+  background-color: rgb(35 95 125);
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}

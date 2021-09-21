@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+
+body {
+  width: 100vw;
+  font-family: 'Balsamiq Sans', cursive;
+}
+
+.p-abs {
+  position: absolute;
+}
+
+.text-color-base {
+  color: rgb(35 95 125) !important;
+}
