@@ -1,0 +1,24 @@
+{
+  "name": "travelly",
+  "version": "1.0.0",
+  "description": "proyecto integrador generation",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GermanOtniel/ProyectoIntegrador-Generation_1.git"
+  },
+  "author": "equipo 1 generation",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GermanOtniel/ProyectoIntegrador-Generation_1/issues"
+  },
+  "homepage": "https://github.com/GermanOtniel/ProyectoIntegrador-Generation_1#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemailer": "^6.6.3"
+  }
+}
