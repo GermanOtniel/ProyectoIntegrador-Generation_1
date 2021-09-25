@@ -50,7 +50,7 @@ header .barra-busqueda {
 header .barra-busqueda input {
 	width: 100%;
 	border: none;
-	background: var(--input);
+	background:  #d1d7dd;
 	color: var(--texto);
 	height: 40px;
 	border-radius: 100px;
@@ -142,7 +142,7 @@ aside {
 }
 
 .enlaces-rapidos > nav a:hover {
-	background: var(--input-hover);
+	background: #d1d7dd ;
 }
 
 .enlaces-rapidos .perfil img {
@@ -210,7 +210,7 @@ footer nav a:hover {
 }
 
 .contactos nav a:hover {
-	background: var(--input-hover);
+	background:  #d1d7dd;
 }
 
 .contactos nav a img {
@@ -225,9 +225,16 @@ main {
 	padding-top: 70px;
 }
 
-main .publicar,
+main .publicar{
+	background:#d0cfcc;
+	width: 100%;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	padding: 10px;
+  border: 1px solid gray;
+}
 main .publicacion {
-	background: var(--fondo-contenido);
+	background:var(--fondo-contenido);
 	width: 100%;
 	border-radius: 5px;
 	margin-bottom: 20px;
@@ -294,7 +301,7 @@ main .publicar .botones a {
 }
 
 main .publicar .botones a:hover {
-	background: var(--input-hover);
+	background: #a7abaf ;
 	color: var(--texto);
 }
 
@@ -370,7 +377,7 @@ main .publicacion .botones button {
 }
 
 main .publicacion .botones button:hover {
-	background: #3a3b3c;
+	background: #d1d7dd;
 }
 
 main .publicacion .botones button svg {
