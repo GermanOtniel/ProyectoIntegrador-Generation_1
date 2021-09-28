@@ -62,19 +62,53 @@ function validation() {
     return null;
   }
 }
-function sendData() {
+
+function enableSendMailButton(btn) {
+  btn.innerHTML = "Enviar";
+  btn.disabled = false;
+}
+
+function disableSendMailButton(btn) {
+  btn.innerHTML = `<div class="d-flex justify-content-center"><div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div><span></span></div>`;
+  btn.disabled = true;
+}
+
+function sendData(event) {
+  const msgOK = document.getElementById('toast-ok');
+  const msgError = document.getElementById('toast-error');
+  let msgToShow = null;
+  
   let data = validation();
+
   console.log(data);
-  if(data!== null){
+
+  if(data !== null) {
+
+    disableSendMailButton(event.target);
+
+    fetch("http://127.0.0.1:3000/contact-us", {
+        method: "POST",
+        headers: {
+            "Content-Type" : 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then((res) => res.json())
+    .then((data) => {
       console.log(data);
-      fetch("http://127.0.0.1:3000/contact-us", {
-          method: "POST",
-          headers: {
-              "Content-Type" : 'application/json'
-          },
-          body: JSON.stringify(data)
-      }).then((res)=> console.log(res))
-      .catch((error)=>console.log(error))
+      msgToShow = data.success ? msgOK : msgError;
+    })
+    .catch((err) => {
+      console.log(err);
+      msgToShow = msgError;
+    })
+    .finally(() => {
+      const toast = new bootstrap.Toast(msgToShow);
+      toast.show();
+      enableSendMailButton(event.target);
+      // reset form
+      document.querySelector('form').reset();
+    });
   }
 }
 
