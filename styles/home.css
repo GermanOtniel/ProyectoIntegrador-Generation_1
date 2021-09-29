@@ -189,7 +189,7 @@ footer nav a:hover {
 	margin-bottom: 10px;
 }
 
-.contactos .publicidad {
+.contactos .destacados {
 	display: block;
 	max-height: 100px;
 	overflow: hidden;
@@ -197,7 +197,7 @@ footer nav a:hover {
 	border-radius: 5px;
 }
 
-.contactos .publicidad img {
+.contactos .destacados img {
 	width: 100%;
 }
 
