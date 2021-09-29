@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
   /*width: 100vw;*/
-  font-family: 'Balsamiq Sans', cursive;
+  font-family: 'Roboto', sans-serif;
 }
 
 .p-abs {
@@ -56,4 +57,9 @@ body {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
+}
+
+.travelly-primary-action {
+  background-color: #010127;
+  border-color: #010127;
 }
