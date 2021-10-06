@@ -1,0 +1,104 @@
+{
+  "recommendations": [
+    {
+      "userPicture" : "images/integrate-project_miguel.jpg",
+      "userName" : "Miguel Santiago", 
+      "userLocation" : "Tepic, Nayarit", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Aquí paseando en la loma.",
+      "uploadedPicture" : "https://hotelfrayjunipero.com/wp-content/uploads/2021/02/LaLoma.jpg",
+      "numOfLikes" : "1000",
+      "numOfComments" : "50"
+    },
+    {
+      "userPicture" : "images/integrate-project_neferti.jpg",
+      "userName" : "Neferti Martínez", 
+      "userLocation" : "La Rumorosa, Jalisco", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Un escenario espectacular.",
+      "uploadedPicture" : "https://mexicali.travel/wp-content/uploads/2018/03/rumorosa-bajacalifornia-head-1.jpg",
+      "numOfLikes" : "80",
+      "numOfComments" : "3"
+    },
+    {
+      "userPicture" : "images/integrate-project-diana.jpeg",
+      "userName" : "Diana Manriquez", 
+      "userLocation" : "Mazamitla, Jalisco", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Pueblito mágico.",
+      "uploadedPicture" : "https://cdn.forbes.com.mx/2021/07/Mazamitla-Pueblo-Ma%CC%81gico-e1626201250705.jpg",
+      "numOfLikes" : "38",
+      "numOfComments" : "5"
+    },
+    {
+      "userPicture" : "images/integrate-project-german.png",
+      "userName" : "Germán Gutiérrez", 
+      "userLocation" : "Ecatepec de Morelos, Estado de México", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Mejor conocido como Ecatepunk, será una experiencia que solo podrás vivir una vez en tu vida.",
+      "uploadedPicture" : "https://ecatepec.sapase.gob.mx/images/cabildo/jhv.jpg",
+      "numOfLikes" : "1",
+      "numOfComments" : "0"
+    },
+    {
+      "userPicture" : "images/integrate-project_liz.png",
+      "userName" : "Lizbeth García", 
+      "userLocation" : "Mazatlán, Sinaloa", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Disfrutando del malecón más grande del mundo :D",
+      "uploadedPicture" : "https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/08/09/2624402.jpg",
+      "numOfLikes" : "30",
+      "numOfComments" : "5"
+    },
+    {
+      "userPicture" : "images/integrate-project-paloma.jpg",
+      "userName" : "Paloma Jaramillo", 
+      "userLocation" : "Chapala, Jalisco", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "¡Disfrutando de la mejor vista!",
+      "uploadedPicture" : "https://upload.wikimedia.org/wikipedia/commons/e/e6/Chapala_jalisco.jpg",
+      "numOfLikes" : "15",
+      "numOfComments" : "5"
+    },
+    {
+      "userPicture" : "images/integrate-project-ricardo.jpg",
+      "userName" : "Ricardo Peralta", 
+      "userLocation" : "Zapopan, Jalisco", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Deliciosa comida, excelente servicio 😁",
+      "uploadedPicture" : "https://media.istockphoto.com/photos/three-carne-asada-mexican-street-tacos-in-corn-tortilla-with-lime-picture-id1272532786?b=1&k=6&m=1272532786&s=170667a&w=0&h=GJ2jnqq0xNU9C9n4ZstB6apT-ouyQoON9CXY3ZwP1s4=",
+      "numOfLikes" : "37",
+      "numOfComments" : "13"
+    },
+    {
+      "userPicture" : "images/integrate-project-german.png",
+      "userName" : "Germán Gutiérrez", 
+      "userLocation" : "Torreón, Coahuila", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Un pueblo pequeño y caluroso pero acogedor.",
+      "uploadedPicture" : "https://lh4.googleusercontent.com/8FeMWpZlj8CH48tlGrkzPVlYWIaSS7OWQOUFPc_NK7_V7M3Z7Xf8BwxGFA-31l7vQF_0wOJbG4-46dklURibXqcpqyn532919Jj5eUYWP4csxQbsTfUKjp8WzsWiMFUFn3VSUtEN",
+      "numOfLikes" : "0",
+      "numOfComments" : "1"
+    },
+    {
+      "userPicture" : "images/integrate-project-paloma.jpg",
+      "userName" : "Paloma Jaramillo", 
+      "userLocation" : "Xochimilco, Ciudad de México", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Dando un paseo en las famosas chinampas.",
+      "uploadedPicture" : "https://www.gustoxmexico.com/images/mexico2020xochimilco.jpg",
+      "numOfLikes" : "30",
+      "numOfComments" : "8"
+    },
+    {
+      "userPicture" : "images/integrate-project-diana.jpeg",
+      "userName" : "Diana Manriquez", 
+      "userLocation" : "Punta Negra, Puerto Vallarta", 
+      "createdAt" : "29 de septiembre de 2021",
+      "recommendationText" : "Pasando el rato.",
+      "uploadedPicture" : "https://puertovallartaproperties.net/wp-content/uploads/2019/02/pnegra902_beach8.jpg",
+      "numOfLikes" : "35",
+      "numOfComments" : "5"
+    }
+  ]
+}
