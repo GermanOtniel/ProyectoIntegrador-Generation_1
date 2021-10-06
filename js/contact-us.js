@@ -1,27 +1,15 @@
-function validateEmail(email) {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
 
-function validateName(name) {
-  var regex = /^[a-zA-Z ]{2,30}$/;
-  return regex.test(name);
-}
-
-function validateTelephone(number) {
-  var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-  return phoneno.test(number);
-}
-
-function validateMessage(message) {
-  return message.length !== 0;
-}
 function validation() {
   let name = document.getElementById("contact-us-name");
   let mail = document.getElementById("contact-us-mail");
   let telephone = document.getElementById("contact-us-telephone");
   let message = document.getElementById("contact-us-message");
+
+  name.value = name.value.trim();
+  mail.value = mail.value.trim();
+  telephone.value = telephone.value.trim();
+  message.value = message.value.trim();
+
   let notError = true;
 
   if(validateName(name.value)===false){
