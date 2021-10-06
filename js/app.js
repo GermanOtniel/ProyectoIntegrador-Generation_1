@@ -111,10 +111,19 @@ window.addEventListener('load', () => {
         toggleModalButton.click();
 
         /* Verificar si se realizó click en un campo en específico, para transferir dicha acción */
-        if (event.target.dataset.type == 'load-image') {
-            console.log('Imagen');
-            document.querySelector('#btn-add-image').click();
+        switch (event.target.dataset.type) {
+            case 'load-image':
+                document.querySelector('#btn-add-image').click();
+                break;
+            case 'text':
+                setTimeout(function (){
+                    document.getElementById('recommendation-text').focus();
+                }, 500);
+                break;
+            default:
+                break;
         }
+
     })
     /* Event Listener para publicar recomendación */
     onSaveRecommendationClicked();
