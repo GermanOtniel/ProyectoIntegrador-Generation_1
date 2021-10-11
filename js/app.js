@@ -7,13 +7,13 @@ function addRecommendation(recommendation) {
             </a>
             <div class="datos">
                 <a class="nombre" href="#">${recommendation.userName}</a>
-                <small><i class="fas fa-map-marker-alt me-1"></i>${recommendation.userLocation}</small>
+                <small><i class="fas fa-map-marker-alt me-1"></i>${recommendation.location}</small>
                 <a class="hora" href="#">${recommendation.createdAt}</a>
             </div>
         </div>
         <div class="body">
-            <p>${recommendation.recommendationText}</p>
-            <img src=${recommendation.uploadedPicture} alt="">
+            <p>${recommendation.recommendationSm}</p>
+            <img src=${recommendation.uploadedMedia[0]} alt="">
         </div>
         <div class="comentarios d-flex justify-content-between">
             <div class="me-gusta d-flex justify-content-start align-items-center">
@@ -67,20 +67,34 @@ function onSaveRecommendationClicked() {
 }
 
 function saveRecommendation() {
-    const recommendationText = document.getElementById('recommendation-text');
+    const msgOK = document.getElementById('toast-ok');
+    const msgError = document.getElementById('toast-error');
+    let msgToShow = null;
+
+
+    const recommendationSm = document.getElementById('recommendation-sm');
+    const locationRec = document.getElementById("location");
+    const category = document.getElementById("category");
     /** validación de campos **/
+
 
     /** crear objeto con la recomendación **/
     const now = new Date();
     const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    const media = [];
+    document.querySelectorAll("#recommendation-media img").forEach((img)=>{
+        media.push(img.src);
+    })
 
     const recommendation = {
         "userPicture" : "images/integrate-project-diana.jpeg",
         "userName" : "Diana Manriquez",
-        "userLocation" : "Xochimilco, Ciudad de México", 
+        "location" : locationRec.value, 
         "createdAt" : now.toLocaleDateString('es-MX', dateOptions),
-        "recommendationText" : recommendationText.value,
-        "uploadedPicture" : "https://www.gustoxmexico.com/images/mexico2020xochimilco.jpg",
+        "category": category.value,
+        "recommendationSm": recommendationSm.value,
+        "recommendationText" : tinymce.get("recommendation-text").getContent(),
+        "uploadedMedia" : media,
         "numOfLikes" : "0",
         "numOfComments" : "0"
     }
@@ -93,15 +107,35 @@ function saveRecommendation() {
         },
         body: JSON.stringify(recommendation)
     })
-    .then((res) => res.json)
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+    .then((res) => res.json())
+    .then((data) =>  {msgToShow = msgOK
+    console.log(msgToShow)})
+    .catch((err) => {msgToShow = msgError
+    console.log("error")})
+    .finally(() => {
+        console.log("Holis")
+        const toast = new bootstrap.Toast(msgToShow);
+        toast.show();
+        // reset form
+        document.getElementById("cancel-recommendation").click();
+      });
 }
 
 window.addEventListener('load', () => {
     /* Transferir click, desde el anchor (botón visual) de añadir imagen, al input-file (cargar imagen) */
     document.querySelector('#btn-add-image').addEventListener('click', () => {
         document.querySelector('#my-image').click();
+    })
+
+    document.querySelector('#btn-add-video').addEventListener('click', () => {
+        document.querySelector('#my-video').click();
+    })
+
+    document.getElementById("cancel-recommendation").addEventListener('click',()=>{
+        document.querySelector("#newRecommendationModal form").reset();
+        tinymce.get("recommendation-text").setContent("");
+        document.getElementById("recommendation-media").innerHTML="";
+
     })
 
     /* Al hacer click en cualquier elemento de nuestro formulario, se ejecuta lo siguiente */
@@ -115,6 +149,9 @@ window.addEventListener('load', () => {
             case 'load-image':
                 document.querySelector('#btn-add-image').click();
                 break;
+            case 'load-video':
+                    document.querySelector('#btn-add-video').click();
+                    break;
             case 'text':
                 setTimeout(function (){
                     document.getElementById('recommendation-text').focus();
@@ -130,5 +167,59 @@ window.addEventListener('load', () => {
 
     /* Cargar recomendaciones */
     loadRecommendations();
+
+    /*Texto enriquecido modal recomendaciones */
+    richTxt();
+
+    uploadedMedia();
+
+    
 });
 
+
+function uploadedMedia(){
+    let mediaBtn = document.getElementById("my-image");
+    let mediaContainer =document.getElementById("recommendation-media");
+
+    mediaBtn.addEventListener("change", ()=>{
+        let media=mediaBtn.files;
+
+        if (FileReader && media && media.length) {    
+            for (let i=0;i<media.length;i++){
+                readMedia(mediaContainer,media[i]);
+            }
+            mediaSortable();
+        }
+    })
+}
+
+function readMedia(mediaContainer,mediaFile){
+    let mediaScanner = new FileReader();
+    mediaScanner.onload = function () {
+        let image = document.createElement("img");
+        image.classList.add("media-thumbnail");
+        image.src = mediaScanner.result;
+        mediaContainer.appendChild(image);
+    }
+    mediaScanner.readAsDataURL(mediaFile);
+}
+
+function richTxt(){
+    tinymce.init({
+        selector: '#recommendation-text',
+        menubar: false,
+    plugins: [
+      'advlist image lists charmap hr',
+      'wordcount insertdatetime nonbreaking',
+      'table emoticons paste help'
+    ],
+    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect  forecolor backcolor | align | bullist numlist outdent indent | table | insertdatetime | emoticons charmap hr',
+
+      });
+}
+
+function mediaSortable(){
+    new Sortable(document.getElementById("recommendation-media"), {
+        ghostClass: 'media-ghost'
+    });
+}

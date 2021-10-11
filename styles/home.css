@@ -270,6 +270,11 @@ main .publicar .formulario input {
 	color: var(--texto);
   border: 1px solid black;
 }
+#newRecommendationModal textarea{
+	width: 100%;
+	min-height: 100px;
+	border: 1px solid black;
+}
 
 #newRecommendationModal input::placeholder,
 main .publicar .formulario input::placeholder {
@@ -440,4 +445,14 @@ main .publicacion .botones button svg {
 #newRecommendationModal .btn-close {
 	background: none;
 	color: inherit;
+}
+
+.media-thumbnail{
+	width: 45px;
+	height: 45px;
+	margin: 5px;
+}
+
+.media-ghost{
+	opacity: 0.7;
 }
