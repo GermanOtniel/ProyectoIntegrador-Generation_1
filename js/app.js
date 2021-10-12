@@ -1,4 +1,7 @@
-function addRecommendation(recommendation) {
+const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+function addRecommendation(recommendation) {  
+  const dateRecommendation = new Date(recommendation.createdAt).toLocaleDateString('es-MX', dateOptions);
   const newRecommendation = `
     <div class="publicacion">
         <div class="header mb-4">
@@ -8,7 +11,7 @@ function addRecommendation(recommendation) {
             <div class="datos">
                 <a class="nombre" href="#">${recommendation.userName}</a>
                 <small><i class="fas fa-map-marker-alt me-1"></i>${recommendation.location}</small>
-                <a class="hora" href="#">${recommendation.createdAt}</a>
+                <a class="hora" href="#">${dateRecommendation}</a>
             </div>
         </div>
         <div class="body">
@@ -55,7 +58,9 @@ function loadRecommendations() {
     fetch('http://localhost:3000/recommendations')
     .then((res) => res.json())
     .then((data) => {
-        data.forEach(recommendation => {
+        data.sort((a,b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        }).forEach(recommendation => {
             addRecommendation(recommendation);
         });
     })
@@ -80,7 +85,7 @@ function saveRecommendation() {
 
     /** crear objeto con la recomendación **/
     const now = new Date();
-    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    
     const media = [];
     document.querySelectorAll("#recommendation-media img").forEach((img)=>{
         media.push(img.src);
@@ -90,7 +95,7 @@ function saveRecommendation() {
         "userPicture" : "images/integrate-project-diana.jpeg",
         "userName" : "Diana Manriquez",
         "location" : locationRec.value, 
-        "createdAt" : now.toLocaleDateString('es-MX', dateOptions),
+        "createdAt" : now,
         "category": category.value,
         "recommendationSm": recommendationSm.value,
         "recommendationText" : tinymce.get("recommendation-text").getContent(),
@@ -113,7 +118,6 @@ function saveRecommendation() {
     .catch((err) => {msgToShow = msgError
     console.log("error")})
     .finally(() => {
-        console.log("Holis")
         const toast = new bootstrap.Toast(msgToShow);
         toast.show();
         // reset form
