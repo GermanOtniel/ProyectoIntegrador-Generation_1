@@ -218,8 +218,14 @@ function richTxt(){
       'table emoticons paste help'
     ],
     toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect  forecolor backcolor | align | bullist numlist outdent indent | table | insertdatetime | emoticons charmap hr',
+    });
 
-      });
+    // Patch table not working
+    document.addEventListener('focusin', (e) => {
+        if (e.target.closest('.tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root')) {
+            e.stopImmediatePropagation();
+        }
+    })
 }
 
 function mediaSortable(){
