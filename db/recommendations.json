@@ -4,10 +4,14 @@
       "id": 1,
       "userPicture": "images/integrate-project_miguel.jpg",
       "userName": "Miguel Santiago",
-      "userLocation": "Tepic, Nayarit",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Tepic, Nayarit",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Aquí paseando en la loma.",
       "recommendationText": "Aquí paseando en la loma.",
-      "uploadedPicture": "https://hotelfrayjunipero.com/wp-content/uploads/2021/02/LaLoma.jpg",
+      "uploadedMedia": [
+        "https://hotelfrayjunipero.com/wp-content/uploads/2021/02/LaLoma.jpg"
+      ],
       "numOfLikes": "1000",
       "numOfComments": "50"
     },
@@ -15,10 +19,14 @@
       "id": 2,
       "userPicture": "images/integrate-project_neferti.jpg",
       "userName": "Neferti Martínez",
-      "userLocation": "La Rumorosa, Jalisco",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "La Rumorosa, Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Un escenario espectacular.",
       "recommendationText": "Un escenario espectacular.",
-      "uploadedPicture": "https://mexicali.travel/wp-content/uploads/2018/03/rumorosa-bajacalifornia-head-1.jpg",
+      "uploadedMedia": [
+        "https://mexicali.travel/wp-content/uploads/2018/03/rumorosa-bajacalifornia-head-1.jpg"
+      ],
       "numOfLikes": "80",
       "numOfComments": "3"
     },
@@ -26,10 +34,14 @@
       "id": 3,
       "userPicture": "images/integrate-project-diana.jpeg",
       "userName": "Diana Manriquez",
-      "userLocation": "Mazamitla, Jalisco",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Mazamitla, Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Pueblito mágico.",
       "recommendationText": "Pueblito mágico.",
-      "uploadedPicture": "https://cdn.forbes.com.mx/2021/07/Mazamitla-Pueblo-Ma%CC%81gico-e1626201250705.jpg",
+      "uploadedMedia": [
+        "https://cdn.forbes.com.mx/2021/07/Mazamitla-Pueblo-Ma%CC%81gico-e1626201250705.jpg"
+      ],
       "numOfLikes": "38",
       "numOfComments": "5"
     },
@@ -37,10 +49,14 @@
       "id": 4,
       "userPicture": "images/integrate-project-german.png",
       "userName": "Germán Gutiérrez",
-      "userLocation": "Ecatepec de Morelos, Estado de México",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Ecatepec de Morelos, Estado de México",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Mejor conocido como Ecatepunk, será una experiencia que solo podrás vivir una vez en tu vida.",
       "recommendationText": "Mejor conocido como Ecatepunk, será una experiencia que solo podrás vivir una vez en tu vida.",
-      "uploadedPicture": "https://ecatepec.sapase.gob.mx/images/cabildo/jhv.jpg",
+      "uploadedMedia": [
+        "https://ecatepec.sapase.gob.mx/images/cabildo/jhv.jpg"
+      ],
       "numOfLikes": "1",
       "numOfComments": "0"
     },
@@ -48,10 +64,14 @@
       "id": 5,
       "userPicture": "images/integrate-project_liz.png",
       "userName": "Lizbeth García",
-      "userLocation": "Mazatlán, Sinaloa",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Mazatlán, Sinaloa",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Disfrutando del malecón más grande del mundo :D",
       "recommendationText": "Disfrutando del malecón más grande del mundo :D",
-      "uploadedPicture": "https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/08/09/2624402.jpg",
+      "uploadedMedia": [
+        "https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/08/09/2624402.jpg"
+      ],
       "numOfLikes": "30",
       "numOfComments": "5"
     },
@@ -59,10 +79,14 @@
       "id": 6,
       "userPicture": "images/integrate-project-paloma.jpg",
       "userName": "Paloma Jaramillo",
-      "userLocation": "Chapala, Jalisco",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Chapala, Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "¡Disfrutando de la mejor vista!",
       "recommendationText": "¡Disfrutando de la mejor vista!",
-      "uploadedPicture": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Chapala_jalisco.jpg",
+      "uploadedMedia": [
+        "https://upload.wikimedia.org/wikipedia/commons/e/e6/Chapala_jalisco.jpg"
+      ],
       "numOfLikes": "15",
       "numOfComments": "5"
     },
@@ -70,10 +94,14 @@
       "id": 7,
       "userPicture": "images/integrate-project-ricardo.jpg",
       "userName": "Ricardo Peralta",
-      "userLocation": "Zapopan, Jalisco",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Zapopan, Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Comida",
+      "recommendationSm": "Deliciosa comida, excelente servicio 😁",
       "recommendationText": "Deliciosa comida, excelente servicio 😁",
-      "uploadedPicture": "https://media.istockphoto.com/photos/three-carne-asada-mexican-street-tacos-in-corn-tortilla-with-lime-picture-id1272532786?b=1&k=6&m=1272532786&s=170667a&w=0&h=GJ2jnqq0xNU9C9n4ZstB6apT-ouyQoON9CXY3ZwP1s4=",
+      "uploadedMedia": [
+        "https://media.istockphoto.com/photos/three-carne-asada-mexican-street-tacos-in-corn-tortilla-with-lime-picture-id1272532786?b=1&k=6&m=1272532786&s=170667a&w=0&h=GJ2jnqq0xNU9C9n4ZstB6apT-ouyQoON9CXY3ZwP1s4="
+      ],
       "numOfLikes": "37",
       "numOfComments": "13"
     },
@@ -81,10 +109,14 @@
       "id": 8,
       "userPicture": "images/integrate-project-german.png",
       "userName": "Germán Gutiérrez",
-      "userLocation": "Torreón, Coahuila",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Torreón, Coahuila",
+      "createdAt": "2021-10-10T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Un pueblo pequeño y caluroso pero acogedor.",
       "recommendationText": "Un pueblo pequeño y caluroso pero acogedor.",
-      "uploadedPicture": "https://lh4.googleusercontent.com/8FeMWpZlj8CH48tlGrkzPVlYWIaSS7OWQOUFPc_NK7_V7M3Z7Xf8BwxGFA-31l7vQF_0wOJbG4-46dklURibXqcpqyn532919Jj5eUYWP4csxQbsTfUKjp8WzsWiMFUFn3VSUtEN",
+      "uploadedMedia": [
+        "https://lh4.googleusercontent.com/8FeMWpZlj8CH48tlGrkzPVlYWIaSS7OWQOUFPc_NK7_V7M3Z7Xf8BwxGFA-31l7vQF_0wOJbG4-46dklURibXqcpqyn532919Jj5eUYWP4csxQbsTfUKjp8WzsWiMFUFn3VSUtEN"
+      ],
       "numOfLikes": "0",
       "numOfComments": "1"
     },
@@ -92,10 +124,14 @@
       "id": 9,
       "userPicture": "images/integrate-project-paloma.jpg",
       "userName": "Paloma Jaramillo",
-      "userLocation": "Xochimilco, Ciudad de México",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Xochimilco, Ciudad de México",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Dando un paseo en las famosas chinampas.",
       "recommendationText": "Dando un paseo en las famosas chinampas.",
-      "uploadedPicture": "https://www.gustoxmexico.com/images/mexico2020xochimilco.jpg",
+      "uploadedMedia": [
+        "https://www.gustoxmexico.com/images/mexico2020xochimilco.jpg"
+      ],
       "numOfLikes": "30",
       "numOfComments": "8"
     },
@@ -103,12 +139,94 @@
       "id": 10,
       "userPicture": "images/integrate-project-diana.jpeg",
       "userName": "Diana Manriquez",
-      "userLocation": "Punta Negra, Puerto Vallarta",
-      "createdAt": "29 de septiembre de 2021",
+      "location": "Punta Negra, Puerto Vallarta",
+      "createdAt": "2021-10-08T12:06:43.140Z",
+      "category": "Recreación",
+      "recommendationSm": "Pasando el rato.",
       "recommendationText": "Pasando el rato.",
-      "uploadedPicture": "https://puertovallartaproperties.net/wp-content/uploads/2019/02/pnegra902_beach8.jpg",
+      "uploadedMedia": [
+        "https://puertovallartaproperties.net/wp-content/uploads/2019/02/pnegra902_beach8.jpg"
+      ],
       "numOfLikes": "35",
       "numOfComments": "5"
+    },
+    {
+      "userPicture": "images/integrate-project-diana.jpeg",
+      "userName": "Diana Manriquez",
+      "location": "Guadalajara,Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Comida",
+      "recommendationSm": "ricos boneless",
+      "recommendationText": "<p>rrwee</p>",
+      "uploadedMedia": [],
+      "numOfLikes": "0",
+      "numOfComments": "0",
+      "id": 11
+    },
+    {
+      "userPicture": "images/integrate-project-diana.jpeg",
+      "userName": "Diana Manriquez",
+      "location": "Guadalajara,Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Comida",
+      "recommendationSm": "Buena ocmida",
+      "recommendationText": "<p>dfggfgdff</p>",
+      "uploadedMedia": [],
+      "numOfLikes": "0",
+      "numOfComments": "0",
+      "id": 12
+    },
+    {
+      "userPicture": "images/integrate-project-diana.jpeg",
+      "userName": "Diana Manriquez",
+      "location": "Guadalajara,Jalisco",
+      "createdAt": "2021-10-01T12:06:43.140Z",
+      "category": "Comida",
+      "recommendationSm": "wwe",
+      "recommendationText": "<p>ew<strong>ew</strong></p>\n<p><strong>wer</strong></p>\n<p>ewew<em>ewew</em>ew</p>",
+      "uploadedMedia": [],
+      "numOfLikes": "0",
+      "numOfComments": "0",
+      "id": 13
+    },
+    {
+      "userPicture": "images/integrate-project-diana.jpeg",
+      "userName": "Diana Manriquez",
+      "location": "Guadalajara,Jalisco",
+      "createdAt": "2021-10-07T12:06:43.140Z",
+      "category": "Comida",
+      "recommendationSm": "Buena ocmida",
+      "recommendationText": "<p>rjydj</p>",
+      "uploadedMedia": [],
+      "numOfLikes": "0",
+      "numOfComments": "0",
+      "id": 14
+    },
+    {
+      "userPicture": "images/integrate-project-diana.jpeg",
+      "userName": "Diana Manriquez",
+      "location": "Guadalajara,Jalisco",
+      "createdAt": "2021-10-02T12:06:43.140Z",
+      "category": "Comida",
+      "recommendationSm": "Buena ocmida",
+      "recommendationText": "<p>gzf</p>",
+      "uploadedMedia": [],
+      "numOfLikes": "0",
+      "numOfComments": "0",
+      "id": 15
+    },
+    {
+      "userPicture": "images/integrate-project-diana.jpeg",
+      "userName": "Diana Manriquez",
+      "location": "Guadalajara,Jalisco",
+      "createdAt": "2021-10-12T02:17:29.421Z",
+      "category": "Comida",
+      "recommendationSm": "holis",
+      "recommendationText": "<p>sa</p>",
+      "uploadedMedia": [],
+      "numOfLikes": "0",
+      "numOfComments": "0",
+      "id": 16
     }
   ]
 }
