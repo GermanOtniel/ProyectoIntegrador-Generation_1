@@ -71,6 +71,29 @@ function onSaveRecommendationClicked() {
     document.getElementById('save-recommendation').addEventListener('click', saveRecommendation);
 }
 
+function validateNewRecommendationForm(textSm, location, category) {
+    const textContainer = document.querySelector('#recommendation-text+div');
+    let noError = true;
+
+    [textSm, location, category].forEach((input) => {
+        if ( !validateMessage(input.value.trim()) ) {
+            input.classList.add('is-invalid');
+            noError = false;
+        } else {
+            input.classList.remove('is-invalid');
+        }
+    });
+
+    if ( !validateMessage(tinymce.get('recommendation-text').getContent()) ) {
+        textContainer.classList.add('is-invalid');
+        noError = false;
+    } else {
+        textContainer.classList.remove('is-invalid');
+    }
+
+    return noError;
+}
+
 function saveRecommendation() {
     const msgOK = document.getElementById('toast-ok');
     const msgError = document.getElementById('toast-error');
@@ -82,6 +105,9 @@ function saveRecommendation() {
     const category = document.getElementById("category");
     /** validación de campos **/
 
+    if (!validateNewRecommendationForm(recommendationSm, locationRec, category)) {
+        return;
+    }
 
     /** crear objeto con la recomendación **/
     const now = new Date();
@@ -122,7 +148,7 @@ function saveRecommendation() {
         toast.show();
         // reset form
         document.getElementById("cancel-recommendation").click();
-      });
+    });
 }
 
 window.addEventListener('load', () => {

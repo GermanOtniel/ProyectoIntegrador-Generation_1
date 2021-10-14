@@ -207,17 +207,21 @@
 				</div>
 				<div class="modal-body">
 					<form class="formulario">
-						<input id="recommendation-sm" class="form-control mb-2" type="text" placeholder="Resumen tu experiencia">
-						<select id="category" class="form-select mb-2" aria-label="Select category">
-							<option selected disabled>Selecciona alguna categoría</option>
+						<input id="recommendation-sm" class="form-control mt-2" type="text" placeholder="Resumen tu experiencia">
+						<small class="invalid-feedback mb-2">Este campo es requerido.</small>
+						<select id="category" class="form-select mt-2" aria-label="Select category">
+							<option selected disabled value="">Selecciona alguna categoría</option>
 							<option value="Comida">Comida</option>
 							<option value="Alojamiento">Alojamiento</option>
 							<option value="Transporte">Transporte</option>
 							<option value="Recreación">Recreación</option>
 						</select>
-						<div id="location" class="autocomplete-container"></div>
+						<small class="invalid-feedback mb-2">Por favor, selecciona una categoría válida.</small>
+						<div id="location" class="autocomplete-container mt-2"></div>
+						<small class="invalid-feedback mb-2">Por favor, ingresa una ubicación.</small>
 						<!-- <input id="location" class="form-control mb-2" type="text" placeholder="Ubicación"> -->
-						<textarea class="form-control mb-2" id="recommendation-text" placeholder="Comparte tu experiencia completa"></textarea>
+						<textarea class="form-control mt-2" id="recommendation-text" placeholder="Comparte tu experiencia completa"></textarea>
+						<small class="invalid-feedback mb-2">Este campo no puede estas vacío.</small>
 						<div class="mt-2 text-center" id="recommendation-media"></div>
 						<hr>
 						<div class="botones d-flex">
@@ -271,6 +275,7 @@
 		<script src="https://cdn.tiny.cloud/1/zapt52jyxc0hur413d9opzi318lbt8z8pmykzayakap16i9d/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 	<script src="http://SortableJS.github.io/Sortable/Sortable.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/validation.js"></script>
 	<script src="js/location-autocomplete.js"></script>
 </body>
 

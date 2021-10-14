@@ -11,6 +11,7 @@ function addressAutocomplete(containerElement, callback, options) {
   // create input element
   const inputElement = document.createElement("input");
   inputElement.setAttribute("type", "text");
+  inputElement.setAttribute("class", "form-control");
   inputElement.setAttribute("placeholder", options.placeholder);
   inputContainerElement.appendChild(inputElement);
 

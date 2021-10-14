@@ -265,29 +265,35 @@ main .foto img {
 main .publicar .formulario input {
 	width: 100%;
 	height: 40px;
-	border-radius: 100px;
+	/* border-radius: 100px; */
 	padding: 0 20px;
 	color: var(--texto);
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
+
+main .publicar .formulario input {
+	border-radius: .25rem;
+	border-width: 1px;
+}
+
 #newRecommendationModal textarea{
 	width: 100%;
 	min-height: 100px;
 	border: 1px solid black;
 }
 
-#newRecommendationModal input::placeholder,
+/* #newRecommendationModal input::placeholder, */
 main .publicar .formulario input::placeholder {
   color: var(--texto);
   opacity: 1; /* Firefox */
 }
 
-#newRecommendationModal input:-ms-input-placeholder,
+/* #newRecommendationModal input:-ms-input-placeholder, */
 main .publicar .formulario input:-ms-input-placeholder { /* Internet Explorer 10-11 */
  color: var(--texto);
 }
 
-#newRecommendationModal input::-ms-input-placeholder,
+/* #newRecommendationModal input::-ms-input-placeholder, */
 main .publicar .formulario input::-ms-input-placeholder { /* Microsoft Edge */
  color: var(--texto);
 }
@@ -295,10 +301,10 @@ main .publicar .formulario input::-ms-input-placeholder { /* Microsoft Edge */
 main .publicar .formulario select {
 	width: 100%;
 	height: 40px;
-	border-radius: 100px;
+	/* border-radius: 100px; */
 	padding: 0 20px;
 	color: var(--texto);
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 #newRecommendationModal .botones a,
@@ -457,8 +463,14 @@ main .publicacion .botones button svg {
 	opacity: 0.7;
 }
 
+div.is-invalid {
+	border-color: #dc3545;
+}
+
 #recommendation-text+div {
-	border: 1px solid black;
-	border-radius: 15px;
+	/* border: 1px solid black;
+	border-radius: 15px; */
+	margin-top: .5rem;
+	border-radius: .25rem;
 	min-height: 115px;
 }
