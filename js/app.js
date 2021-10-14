@@ -78,10 +78,10 @@ function saveRecommendation() {
 
 
     const recommendationSm = document.getElementById('recommendation-sm');
-    const locationRec = document.getElementById("location");
+    const locationRec = document.querySelector("#location input");
     const category = document.getElementById("category");
     /** validación de campos **/
-
+    console.log(locationRec);
 
     /** crear objeto con la recomendación **/
     const now = new Date();
