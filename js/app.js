@@ -81,7 +81,7 @@ function saveRecommendation() {
     const locationRec = document.querySelector("#location input");
     const category = document.getElementById("category");
     /** validación de campos **/
-    console.log(locationRec);
+
 
     /** crear objeto con la recomendación **/
     const now = new Date();
@@ -176,7 +176,7 @@ window.addEventListener('load', () => {
     richTxt();
 
     uploadedMedia();
-
+    mediaSortable();
     
 });
 
@@ -192,7 +192,7 @@ function uploadedMedia(){
             for (let i=0;i<media.length;i++){
                 readMedia(mediaContainer,media[i]);
             }
-            mediaSortable();
+            
         }
     })
 }
