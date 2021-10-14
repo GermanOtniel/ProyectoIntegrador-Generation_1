@@ -25,6 +25,10 @@ body {
   background-color: #010127;
 }
 
+.bg-navbar .nav-link.active {
+  color: #2D88FF !important;
+}
+
 .travelly-btn-lg {
   width: 300px;
   height: 60px;

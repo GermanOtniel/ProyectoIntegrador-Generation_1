@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/styles/general.css">
   <link rel="stylesheet" href="/styles/about-us.css">
   <link rel="stylesheet" href="/styles/contact-us.css">
+  <link rel="stylesheet" href="/styles/index.css">
   <title>Contáctanos</title>
 </head>
 
@@ -29,7 +30,7 @@
             <a class="nav-link text-color-base" aria-current="page" href="index.html">Ingresar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-color-base" href="contact-us.html">Contáctanos</a>
+            <a class="nav-link text-color-base active" href="contact-us.html">Contáctanos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-color-base" href="about-us.html">Acerca de nosotros</a>
@@ -48,10 +49,9 @@
 
   <div class="contact-us-form d-flex justify-content-end">
 
-    <form class="contact-us-container col-4">
+    <!-- <form class="contact-us-container col-4">
       <div class="mb-3">
         <h2 class="mb-2">Contáctanos</h2>
-        <!-- <p class="my-0">¿Tienes alguna duda o sugerencia? Completa el siguiente formulario.</p> -->
         <small class="my-0">¿Tienes alguna duda o sugerencia? Completa el siguiente formulario.</small>
       </div>
       <div class="mb-3">
@@ -72,7 +72,57 @@
           placeholder="Háznos saber tu opinión."></textarea>
       </div>
       <button id="sub-btn" type="button" class="travelly-btn-md">Enviar</button>
-    </form>
+    </form> -->
+
+    <main>
+      <div class="contenedor__todo">
+          <div class="caja__trasera">
+              <div class="caja__trasera-login">
+                  <h3>¿Tienes alguna duda o sugerencia?</h3>
+                  <p>Ayúdanos completando el siguiente formulario.</p>
+              </div>
+          </div>
+
+          <!--Formulario de Login y registro-->
+          <div class="contenedor__login-register">
+              <!--Login-->
+              <form class="formulario__login">
+                  <h2>Iniciar Sesión</h2>
+                  <input id="login-email" class="form-control" type="text" placeholder="Correo Electronico">
+                  <small class="text-danger" id="error-email-login" ></small>
+                  <input id="login-pass" class="form-control" type="password" placeholder="Contraseña">
+                  <small class="text-danger" id="error-pass-login" ></small><br/>
+                  <button id="action-login">Entrar</button>
+              </form>
+
+              <!--Register-->
+              <form class="formulario__register">
+                <h2>Contáctanos</h2>
+                <div class="mb-3">
+                  <input required type="text" class="form-control" id="contact-us-name" placeholder="Nombre">
+                  <small class="invalid-feedback">Nombre inválido.</small>
+                </div>
+                <div class="mb-3">
+                  <input required type="email" class="form-control" id="contact-us-mail" placeholder="Correo electrónico">
+                  <small class="invalid-feedback">Correo electrónico inválido.</small>
+                </div>
+                <div class="mb-3">
+                  <input required type="text" class="form-control" id="contact-us-telephone" placeholder="Teléfono">
+                  <small class="invalid-feedback">Teléfono inválido.</small>
+                </div>
+                <div class="mb-3">
+                  <textarea required class="form-control" id="contact-us-message" rows="3"
+                    placeholder="Háznos saber tu opinión"></textarea>
+                    <small class="invalid-feedback mb-2">Por favor, escribe un mensaje.</small>
+                </div>
+                <div class='d-flex justify-content-center'>
+                  <button id="sub-btn" type="button">Enviar</button>
+                </div>
+              </form>
+          </div>
+      </div>
+
+  </main>
 
     <div class="position-fixed top-4 start-0 p-3" style="z-index: 11">
       <div class="toast align-items-center text-white bg-success border-0" id="toast-ok" role="alert"
