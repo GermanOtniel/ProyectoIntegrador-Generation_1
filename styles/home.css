@@ -132,6 +132,10 @@ aside {
 	padding-top: 60px;
 }
 
+.contenido-principal {
+	background-color: #eee !important;
+}
+
 /* Aside Enlaces Rapidos */
 .enlaces-rapidos > nav a {
 	display: flex;
@@ -226,7 +230,7 @@ main {
 }
 
 main .publicar{
-	background:#d0cfcc;
+	background:white;
 	width: 100%;
 	border-radius: 5px;
 	margin-bottom: 20px;
@@ -301,10 +305,8 @@ main .publicar .formulario input::-ms-input-placeholder { /* Microsoft Edge */
 main .publicar .formulario select {
 	width: 100%;
 	height: 40px;
-	/* border-radius: 100px; */
 	padding: 0 20px;
 	color: var(--texto);
-  /* border: 2px solid black; */
 }
 
 #newRecommendationModal .botones a,
@@ -424,6 +426,7 @@ main .publicacion .botones button svg {
 	}
 
 	.contenido-principal {
+		background-color: #eee !important;
 		padding-top: 70px;
 	}
 }
