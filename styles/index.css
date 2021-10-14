@@ -21,6 +21,10 @@ main{
   margin-top: 20vh;
 }
 
+.is-invalid {
+  border: 1px solid #dc3545 !important;
+}
+
 .contenedor__todo{
   width: 100%;
   max-width: 800px;
@@ -94,9 +98,17 @@ main{
   transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
 }
 
-.contenedor__login-register form{
+.contenedor__login-register .formulario__login{
   width: 100%;
   padding: 80px 20px;
+  background: white;
+  position: absolute;
+  border-radius: 20px;
+}
+
+.contenedor__login-register .formulario__register{
+  width: 100%;
+  padding: 60px 20px;
   background: white;
   position: absolute;
   border-radius: 20px;
@@ -119,10 +131,23 @@ main{
   outline: none;
 }
 
-.contenedor__login-register form button{
+.contenedor__login-register .formulario__login button{
   border-radius: 45px;
   padding: 10px 40px;
   margin-top: 40px;
+  border: none;
+  font-size: 14px;
+  background: #010127;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  outline: none;
+}
+
+.contenedor__login-register .formulario__register button{
+  border-radius: 45px;
+  padding: 10px 40px;
+  margin-top: 10px;
   border: none;
   font-size: 14px;
   background: #010127;
