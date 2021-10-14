@@ -160,8 +160,8 @@ const validateDataRegister = () => {
 
 buttonRegisterAction.addEventListener('click', function(e) {
     e.preventDefault();
-    const validation = validateDataRegister();
-    if (!validation) {
+    const existsErrors = validateDataRegister();
+    if (!existsErrors) {
         const newUser = {
             "full_name": fullNameInput.value,
             "email": emailInput.value,
@@ -195,14 +195,18 @@ const validateDataLogin = () => {
         emailLogin.classList.add('is-invalid');
         textErrorEmailLogin.innerText = 'El correo electróncio es inválido';
     } else {
-
+        existError = false;
+        emailLogin.classList.remove('is-invalid');
+        textErrorEmailLogin.innerText = '';
     }
     if (!validatePassword(passwordLogin.value)) {
         existError = true;
         passwordLogin.classList.add('is-invalid');
         textErrorPassLogin.innerText = 'La contraseña es un campo requerido';
     } else {
-
+        existError = false;
+        passwordLogin.classList.remove('is-invalid');
+        textErrorPassLogin.innerText = '';
     }
 
     return existError;
