@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="/styles/general.css">
 	<link rel="stylesheet" href="/styles/location-autocomplete.css">
 	<link rel="stylesheet" href="/styles/home.css">
+  <link rel="stylesheet" href="/styles/chat.css">
 	<title>Travelly Home</title>
 </head>
 
@@ -74,8 +75,8 @@
 					<a href="#">
 						<i class="bi bi-grid-fill"></i>
 					</a>
-					<a href="#">
-						<i class="bi bi-chat-fill"></i>
+					<a data-bs-toggle="modal" data-bs-target="#chat-modal">
+						<i class="bi bi-chat-fill" ></i>
 					</a>
 					<a href="#">
 						<i class="bi bi-bell-fill"></i>
@@ -246,6 +247,184 @@
 			</div>
 		</div>
 	</div>
+
+	<!--Modal chat-->
+	<div class="modal fade" id="chat-modal" tabindex="-1" aria-labelledby="chatLabel" aria-hidden="true">
+		<div class="modal-dialog  modal-lg">
+			<div class="modal-content">
+				<div class="modal-header bg-navbar text-color-base">
+					<h5 class="modal-title" id="chatLabel"></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+            <div class="col-md-4">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Busca a tu amigo" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+              </div>
+              <hr>
+              <div class="list-group chat-friends">
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Uno</span>
+                  </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Dos</span>
+                  </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Tres</span>
+                  </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Cuatro</span>
+                  </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Cinco</span>
+                  </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Seis</span>
+                  </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex" aria-current="true">
+                  <div class="chat-friend-image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="w-100">
+                  </div>
+                  <div class="chat-friend-name ps-3">
+                    <span>Amigo Siete</span>
+                  </div>
+                </a>
+              </div>
+      
+            </div>
+            <div class="col-md-8">
+              <div class="container chat-area pt-3 mb-2">
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                    Hola
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 ms-auto text-end">
+                    Hola como estas?!
+                  </div>
+                  
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                     Bien y tu?
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                    Hola
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 ms-auto text-end">
+                    Hola como estas?!
+                  </div>
+                  
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                     Bien y tu?
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                    Hola
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 ms-auto text-end">
+                    Hola como estas?!
+                  </div>
+                  
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                     Bien y tu?
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                    Hola
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 ms-auto text-end">
+                    Hola como estas?!
+                  </div>
+                  
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                     Bien y tu?
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                    Hola
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 ms-auto text-end">
+                    Hola como estas?!
+                  </div>
+                  
+                </div>
+                <div class="row mb-2">
+                  <div class="col-8 me-auto">
+                     Bien y tu?
+                  </div>
+                </div>
+              </div>
+              <div class="chat-text">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Mensaje" aria-label="Recipient's username" aria-describedby="button-addon2">
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Enviar</button>
+                </div>
+                <!-- <textarea class="form-control " id="chat-text" placeholder="Mensaje"></textarea> -->
+              </div>
+            </div>
+          </div>
+          
+
+
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
 	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
 		<div class="toast align-items-center text-white bg-success border-0" id="toast-ok" role="alert"
 		  aria-live="assertive" aria-atomic="true">
