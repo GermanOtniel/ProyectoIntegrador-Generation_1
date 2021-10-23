@@ -452,7 +452,8 @@ main .publicacion .botones button svg {
 }
 
 #chat-modal .btn-close,
-#newRecommendationModal .btn-close {
+#newRecommendationModal .btn-close,
+#profile-modal .btn-close {
 	background: none;
 	color: inherit;
 }
@@ -477,4 +478,49 @@ div.is-invalid {
 	margin-top: .5rem;
 	border-radius: .25rem;
 	min-height: 115px;
+}
+
+/*Perfil*/
+.card {
+	width: 400px;
+	border: none;
+	border-radius: 10px;
+	background-color: #fff
+}
+
+.stats {
+	background: #f2f5f8 !important;
+	color: #000 !important
+}
+.text-profile-numbers {
+	font-size: 15px;
+	color: #a1aab9;
+	margin-right: 8px;
+}
+.numbers {
+	font-weight: 500;
+}
+.imgrounded {
+	border-radius: 100%;
+	margin-right: 30px;
+}
+.modal-bodyProfile {
+	position: relative;
+	flex: 1 1 auto;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+.btn-editProfile{
+	width: 250px;
+	margin-left: 10px;
+	border-color: #0d6efd;
+	color:#ffff;
+	background-color: #0d6efd;
+}
+.btn-editProfile:hover{
+	color: #fff;
+	background: #010127;
+	border-color: #010127;
 }

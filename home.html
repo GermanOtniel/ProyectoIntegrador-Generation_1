@@ -90,7 +90,7 @@
 		<div class="contenido-principal row justify-content-evenly">
 			<aside class="enlaces-rapidos col-3 col-xl-2">
 				<nav>
-					<a href="#" class="perfil">
+					<a data-bs-toggle="modal" data-bs-target="#profile-modal" class="perfil">
 						<img src="images/integrate-project-diana.jpeg" alt="">Diana Manriquez
 					</a>
 					<a href="#">
@@ -420,6 +420,43 @@
 
 				</div>
 				
+			</div>
+		</div>
+	</div>
+
+	<!--Modal Profile-->
+	<div class="modal fade" id="profile-modal" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header bg-navbar text-color-base">
+					<h5 class="modal-title" id="profileLabel">Tu Perfil</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+				</div>
+				<div class="modal-bodyProfile">
+					<div class="card p-3">
+						<div class="d-flex ">
+								<div class="image"> <img src="./images/integrate-project-diana.jpeg" class="imgrounded" width="155"> </div>
+								<div class="ml-3 w-100">
+										<h4 class="mb-0 mt-0">Diana Manriquez</h4> <span>ING. Desarrollo de Software <br>Danza Polinesia <br> Me encanta estar en el <b>Bosque</b>.</span>
+										<div class="p-2 mt-3 bg-primary d-flex justify-content-between rounded text-white stats">
+												<div class="d-flex flex-column"> 
+													<span class="text-profile-numbers">Seguidores</span> <span class="numbers">128</span> 
+												</div>
+												<div class="d-flex flex-column"> 
+													<span class="text-profile-numbers">Seguidos</span> <span class="numbers">370</span> 
+												</div>
+												<div class="d-flex flex-column"> 
+													<span class="text-profile-numbers">Recomendaciones</span> <span class="numbers">238</span> 
+												</div>
+										</div>
+										<div class="button mt-2 d-flex flex-row align-items-center">
+											<button class="btn btn-md btn-editProfile">Editar Perfil</button>
+											<!-- <button class="btn btn-sm btn-outline-primary">Chat</button> <button class="btn btn-sm btn-primary ml-2">Follow</button> --> 
+											</div>
+								</div>
+						</div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>
