@@ -1,7 +1,12 @@
 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
+function getDateOfRecommendation(date) {
+    const dateRecom = new Date(date).toLocaleDateString('es-MX', dateOptions);
+    return dateRecom;
+};
+
 function addRecommendation(recommendation) {  
-  const dateRecommendation = new Date(recommendation.createdAt).toLocaleDateString('es-MX', dateOptions);
+
   const newRecommendation = `
     <div class="publicacion">
         <div class="header mb-4">
@@ -11,7 +16,7 @@ function addRecommendation(recommendation) {
             <div class="datos">
                 <a class="nombre" href="#">${recommendation.userName}</a>
                 <small><i class="fas fa-map-marker-alt me-1"></i>${recommendation.location}</small>
-                <a class="hora" href="#">${dateRecommendation}</a>
+                <a class="hora" href="#">${getDateOfRecommendation(recommendation.createdAt)}</a>
             </div>
         </div>
         <div class="body">
@@ -40,13 +45,68 @@ function addRecommendation(recommendation) {
             </button>
         </div>
         <div class="d-grid gap-2 mt-1">
-        <button class="btn btn-primary travelly-primary-action" type="button">Conoce más</button>
+        <button onclick="getRecommendationData('${recommendation.id}')" class="btn btn-primary travelly-primary-action" type="button">Conoce más</button>
         </div>
     </div>
     `;
     const recommendationSection = document.querySelector(".publicaciones");
     recommendationSection.innerHTML += newRecommendation;
 }
+
+const getRecommendationData = (recommId) => {
+    const modalButton = document.getElementById('knowMoreButton');
+    fetch(`http://localhost:3000/recommendations?id=${recommId}`)
+    .then((res) => res.json())
+    .then((data) => {
+        if (data && data.length > 0) {
+            const recommendation = data[0];
+            const bodyModal = document.getElementById('knowMoreBodyModal');
+            bodyModal.innerHTML = `
+            <div>
+                <h4>${recommendation.location}</h4>
+                <p>
+                    ${recommendation.userName + ' (' + getDateOfRecommendation(recommendation.createdAt) + ')'}
+                </p>
+                <small>
+                    ${recommendation.recommendationText}
+                </small>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        ${ recommendation.uploadedMedia.map((media, i) => (
+                            `
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="${i === 0 ? "active" : ""}" aria-current="true" aria-label="${'Archivo ' + (i + 1)}"></button>
+                            `
+                        )) }
+                    </div>
+                    <div class="carousel-inner">
+                        ${ recommendation.uploadedMedia.map((media, i) => (
+                            `
+                                <div class="${i === 0 ? "carousel-item active" : "carousel-item"}">
+                                    <img src=${media} class="d-block w-100" alt=${'Archivo #' + (i + 1)}>
+                                </div>
+                            `
+                        )) }
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            `;
+            console.log(data);
+        }
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+        modalButton.click();
+    });
+};
 
 /**
  * -- Instalar globalmente JSON SERVER --
