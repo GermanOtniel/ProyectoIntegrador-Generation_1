@@ -1,0 +1,55 @@
+.chat-friend-image {
+    width: 50px;
+  }
+
+  .chat-friend-image img {
+    border-radius: 50%;
+  }
+
+  .chat-friend-name {
+    display: flex;
+    align-items: center;
+  }
+
+.chat-area div.me-auto{
+    padding: 0.3em 1em;
+    background-color:white;
+    border-radius: 10px;
+}
+
+.chat-area div.ms-auto{
+    padding: 0.3em 1em;
+    background-color:#2798c55e;
+    border-radius: 10px;
+}
+
+
+
+.chat-area{
+    max-height: calc(100% - 40px);
+    background-color: #eee;
+    border-radius: 0.25rem;
+    overflow-y: hidden;
+
+}
+
+.chat-friends{
+    max-height: calc(100% - 65px);
+    overflow-y: hidden;
+}
+
+.chat-friends:hover{
+    overflow-y: auto;
+}
+
+.chat-area:hover{
+    overflow-y: auto;
+}
+
+#chat-modal .modal-body>.row>div{
+    max-height: 75vh !important;
+}
+
+
+
+
