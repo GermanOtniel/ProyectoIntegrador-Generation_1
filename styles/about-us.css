@@ -30,7 +30,7 @@
 .about-us-btn {
   width: 300px;
   height: 60px;
-  font-size: 1.3vw;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: bolder;
@@ -102,4 +102,25 @@
 .text-center>button{
   width: 49px;
   height: 49px;
+}
+
+.about-us-text>div{
+  width: 60%;
+}
+
+#team{
+  margin-right: 0%;
+}
+@media screen and (max-width: 850px){
+  .about-us-text>div>p{
+    font-size: 1rem;
+  }
+  .about-us-text>div{
+    width: 100%;
+  }
+  .about-us-text{
+    margin-top: 35px;
+  }
+
+
 }

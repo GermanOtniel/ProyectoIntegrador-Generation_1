@@ -32,7 +32,7 @@ body {
 .travelly-btn-lg {
   width: 300px;
   height: 60px;
-  font-size: 1.3vw;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: bolder;
@@ -66,4 +66,13 @@ body {
 .travelly-primary-action {
   background-color: #010127;
   border-color: #010127;
+}
+
+@media screen and (max-width: 850px){
+  .travelly-btn-lg {
+    width: 210px;
+    height: 45px;
+    font-size: 0.7rem;
+    
+  }
 }
