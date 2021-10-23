@@ -125,3 +125,7 @@ function sendData(event) {
 }
 
 document.getElementById("sub-btn").addEventListener("click", sendData);
+document.getElementById("navbar-button").addEventListener("click", ()=>{
+  document.querySelector("main").classList.toggle("top-margin-responsive");
+});
+window.addEventListener('resize', register);

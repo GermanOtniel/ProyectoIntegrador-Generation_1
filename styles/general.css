@@ -14,7 +14,7 @@ body {
   color: rgb(218 229 232 / 82%) !important;
 }
 .overlay{
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
   height: 100vh;

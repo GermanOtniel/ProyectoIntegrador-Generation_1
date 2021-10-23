@@ -158,8 +158,6 @@ main{
 }
 
 
-
-
 .formulario__login{
   opacity: 1;
   display: block;
@@ -168,7 +166,9 @@ main{
   display: none;
 }
 
-
+.top-margin-responsive{
+  margin-top: 25vh;
+}
 
 @media screen and (max-width: 850px){
 
@@ -192,7 +192,7 @@ main{
   /*Formularios*/
 
   .contenedor__login-register{
-      top: -10px;
+      top: 195px;
       left: -5px;
       margin: auto;
   }

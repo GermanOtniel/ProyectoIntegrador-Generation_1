@@ -6,6 +6,9 @@
    
   }
 
+body{
+    background-image: url(https://cdn.pixabay.com/photo/2018/10/15/19/08/lake-3749758_960_720.png) !important;
+}
 .contact-us-img{
     position: relative;
 }
@@ -23,13 +26,37 @@
 }
 
 main {
-    margin-top: 16vh !important;
+    margin-top: 30vh ;
+}
+
+.top-margin-responsive{
+    margin-top: 35vh;
 }
 
 .contenedor__login-register .formulario__register {
     padding: 35px 20px !important;
 }
 
+@media screen and (max-width: 850px){
+    main{
+        margin-top: 16vh;
+    }
 
+    .top-margin-responsive{
+        margin-top: 20vh;
+    }
+    /*Formularios*/
+  
+    .contenedor__login-register{
+        top: 150px;   
 
+    }
+    .caja__trasera{
+        text-align: center;
+    }
+    .caja__trasera-login{
+        width: 90%;
+        margin: 20px auto !important;
+    }  
+}
 
