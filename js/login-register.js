@@ -73,6 +73,8 @@ const selectRegisterBtn = document.getElementById('btn__registrarse');
 const errFName = document.getElementById('error-fullname');
 const errEmail = document.getElementById('error-email');
 const errPass = document.getElementById('error-pass');
+const phoneNumber = document.getElementById('phone-reg');
+const errPhone = document.getElementById('error-number');
 
 const emailLogin = document.getElementById('login-email');
 const passwordLogin = document.getElementById('login-pass');
@@ -120,6 +122,15 @@ function validatePasswords(pass1, pass2) {
     const re = /(?=.{8,})/;
     return re.test(pass1) && re.test(pass2) && (pass1 === pass2);
 }
+function validatePhoneNumber(phone) {
+    const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if(phone.match(re)) {
+      return true;
+    }
+    
+    return false;
+    
+  }
 
 function validatePassword(pass) {
     return pass.trim() !== '';
@@ -154,7 +165,15 @@ const validateDataRegister = () => {
         passwordConfirmInput.classList.remove('is-invalid');
         errPass.innerText = '';
     }
-
+    if(!validatePhoneNumber(phoneNumber.value)){
+        phoneNumber.classList.add('is-invalid');
+        errPhone.innerText = 'El número de teléfono es inválido';
+        existError = true;
+    }else{
+        phoneNumber.classList.remove('is-invalid');
+        errPhone.innerText = '';
+        existError = false;
+    }
     return existError;
 };
 
@@ -164,6 +183,7 @@ buttonRegisterAction.addEventListener('click', function(e) {
     if (!existsErrors) {
         const newUser = {
             "full_name": fullNameInput.value,
+            "phone_number" : phoneNumber.value,
             "email": emailInput.value,
             "password": passwordConfirmInput.value
         };
