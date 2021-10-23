@@ -14,4 +14,22 @@
     
 }
 
+.caja__trasera {
+    justify-content: left !important;
+}
+
+.caja__trasera-login {
+    width: 50%;
+}
+
+main {
+    margin-top: 16vh !important;
+}
+
+.contenedor__login-register .formulario__register {
+    padding: 35px 20px !important;
+}
+
+
+
 
