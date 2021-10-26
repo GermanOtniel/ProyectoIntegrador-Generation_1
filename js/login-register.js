@@ -240,32 +240,19 @@ actionBtnLogin.addEventListener('click', function(e) {
     e.preventDefault();
     const existsErrors = validateDataLogin();
     if (!existsErrors) {
-        fetch(`http://localhost:3000/users?email=${emailLogin.value}`, {
-            method: 'GET',
+        fetch(`http://localhost:8080/login`, {
+            method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                email: emailLogin.value,
+                password: passwordLogin.value
+            })
         })
         .then((res) => res.json())
         .then((data) =>  {
-            if (data.length > 0) {
-                if (checkCorrectPassword(passwordLogin.value, data[0]['password'])) {
-                    localStorage.setItem(
-                        'userSession',
-                        JSON.stringify(data[0])
-                    );
-                    window.location.href = '/home.html';
-                } else {
-                    emailLogin.classList.add('is-invalid');
-                    textErrorEmailLogin.innerText = 'Las credenciales son inválidas';
-                    passwordLogin.classList.add('is-invalid');
-                    textErrorPassLogin.innerText = 'Las credenciales son inválidas';
-                }
-            }
-            if (data.length === 0) {
-                emailLogin.classList.add('is-invalid');
-                textErrorEmailLogin.innerText = 'El correo electrónico ingresado aún no ha sido registrado';
-            }
+            console.log(data);
         })
         .catch((err) => {
             renderErrorMsg();
