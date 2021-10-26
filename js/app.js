@@ -15,8 +15,8 @@ function addRecommendation(recommendation) {
             </div>
         </div>
         <div class="body">
-            <p>${recommendation.recommendationSm}</p>
-            <img src=${recommendation.uploadedMedia[0]} alt="">
+            <p>${recommendation.summary}</p>
+            <img src=${recommendation.uploadedMedia} alt="">
         </div>
         <div class="comentarios d-flex justify-content-between">
             <div class="me-gusta d-flex justify-content-start align-items-center">
@@ -55,14 +55,24 @@ function addRecommendation(recommendation) {
  * json-server --watch db/recommendations.json
  */
 function loadRecommendations() {
-    fetch('http://localhost:3000/recommendations')
+    fetch('http://localhost:8080/recommendations',{
+        method: "GET",
+        headers: {
+             'Content-Type' : 'application/json'
+        }
+
+    })
     .then((res) => res.json())
     .then((data) => {
-        data.sort((a,b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt);
-        }).forEach(recommendation => {
+        console.log (data);
+        data.forEach((recommendation) =>{
             addRecommendation(recommendation);
-        });
+        }) 
+        // data.sort((a,b) => {
+        //     return new Date(b.createdAt) - new Date(a.createdAt);
+        // }).forEach(recommendation => {
+        //     addRecommendation(recommendation);
+        // });
     })
     .catch((err) => console.log(err))
 }

@@ -253,6 +253,20 @@ actionBtnLogin.addEventListener('click', function(e) {
         .then((res) => res.json())
         .then((data) =>  {
             console.log(data);
+            if (data != null){
+                localStorage.setItem(
+                    'userSession',
+                    JSON.stringify(data)
+                );
+                window.location.href = '/home.html';
+
+            }
+            else {
+                emailLogin.classList.add('is-invalid');
+                textErrorEmailLogin.innerText = 'Las credenciales son inválidas';
+                passwordLogin.classList.add('is-invalid');
+                textErrorPassLogin.innerText = 'Las credenciales son inválidas';
+            }
         })
         .catch((err) => {
             renderErrorMsg();
