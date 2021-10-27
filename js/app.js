@@ -6,24 +6,26 @@ function addRecommendation(recommendation) {
     <div class="publicacion">
         <div class="header mb-4">
             <a class="foto" href="#">
-                <img src=${recommendation.userPicture} alt="">
+                <img src=${recommendation.user.profilePicture}>
             </a>
             <div class="datos">
-                <a class="nombre" href="#">${recommendation.userName}</a>
+                <a class="nombre" href="#">${recommendation.user.name}</a>
                 <small><i class="fas fa-map-marker-alt me-1"></i>${recommendation.location}</small>
                 <a class="hora" href="#">${dateRecommendation}</a>
             </div>
         </div>
         <div class="body">
             <p>${recommendation.summary}</p>
-            <img src=${recommendation.uploadedMedia} alt="">
+            ${recommendation.uploadedMedia.length > 0
+                ? `<img src=${recommendation.uploadedMedia[0].content}>`
+                :""}
         </div>
         <div class="comentarios d-flex justify-content-between">
             <div class="me-gusta d-flex justify-content-start align-items-center">
                 <i class="bi bi-heart-fill me-gusta"></i>
-                <span>${recommendation.numOfLikes}</span>
+                <span>${recommendation.likes.length}</span>
             </div>
-            <a href="#">${recommendation.numOfComments} comentarios</a>
+            <a href="#">${recommendation.comments.length} comentarios</a>
         </div>
         <div class="botones  d-flex">
             <button class="me-gusta">
@@ -104,11 +106,31 @@ function validateNewRecommendationForm(textSm, location, category) {
     return noError;
 }
 
+function currentSession() {
+    return JSON.parse(localStorage.getItem('userSession'));
+}
+
+function loadCurrentUserData() {
+    const user = currentSession();
+    const avatarList = document.getElementsByClassName('user-avatar');
+    const usernameList = document.getElementsByClassName('currentUserName');
+    const inputPlaceholder = document.getElementById('recomm-input');
+
+    console.log(user);
+    console.log(avatarList);
+    console.log(usernameList);
+
+    [...avatarList].forEach(avatar => (avatar.src = user.profilePicture));
+    [...usernameList].forEach(uname => (uname.innerHTML = user.name));
+    inputPlaceholder.placeholder = inputPlaceholder.placeholder.replace('USER_NAME', user.name.split(" ")[0])
+
+
+}
+
 function saveRecommendation() {
     const msgOK = document.getElementById('toast-ok');
     const msgError = document.getElementById('toast-error');
     let msgToShow = null;
-
 
     const recommendationSm = document.getElementById('recommendation-sm');
     const locationRec = document.querySelector("#location input");
@@ -121,27 +143,32 @@ function saveRecommendation() {
 
     /** crear objeto con la recomendación **/
     const now = new Date();
+    const user = currentSession();
     
     const media = [];
     document.querySelectorAll("#recommendation-media img").forEach((img)=>{
-        media.push(img.src);
+        media.push({
+            userId: user.userId,
+            content: img.src,
+            mediaType: "photo"
+        });
     })
 
     const recommendation = {
-        "userPicture" : "images/integrate-project-diana.jpeg",
-        "userName" : "Diana Manriquez",
-        "location" : locationRec.value, 
-        "createdAt" : now,
-        "category": category.value,
-        "recommendationSm": recommendationSm.value,
-        "recommendationText" : tinymce.get("recommendation-text").getContent(),
-        "uploadedMedia" : media,
-        "numOfLikes" : "0",
-        "numOfComments" : "0"
+        user : {
+            userId: user.userId
+        },
+        location : locationRec.value, 
+        category: {
+            categoryId: category.value
+        },
+        summary: recommendationSm.value,
+        text : tinymce.get("recommendation-text").getContent(),
+        uploadedMedia : media,
     }
 
     /* Publicar recomendación, mediante petición POST */
-    fetch('http://localhost:3000/recommendations', {
+    fetch('http://localhost:8080/recommendations', {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -149,10 +176,11 @@ function saveRecommendation() {
         body: JSON.stringify(recommendation)
     })
     .then((res) => res.json())
-    .then((data) =>  {msgToShow = msgOK
-    console.log(msgToShow)})
-    .catch((err) => {msgToShow = msgError
-    console.log("error")})
+    .then((data) =>  msgToShow = msgOK)
+    .catch((err) => {
+        msgToShow = msgError
+        console.log(err)
+    })
     .finally(() => {
         const toast = new bootstrap.Toast(msgToShow);
         toast.show();
@@ -206,6 +234,8 @@ window.addEventListener('load', () => {
     onSaveRecommendationClicked();
 
     /* Cargar recomendaciones */
+    loadCurrentUserData();
+    loadCategories();
     loadRecommendations();
 
     /*Texto enriquecido modal recomendaciones */
@@ -268,4 +298,16 @@ function mediaSortable(){
     new Sortable(document.getElementById("recommendation-media"), {
         ghostClass: 'media-ghost'
     });
+}
+
+function loadCategories() {
+    const selectCategory = document.getElementById('category');
+    fetch('http://localhost:8080/categories')
+    .then((res) => res.json())
+    .then((categories) => {
+        categories.forEach((category) => {
+            selectCategory.innerHTML += `<option value=${category.categoryId}>${category.name}</option>`;
+        });
+    })
+    .catch((err) => console.log(err))
 }

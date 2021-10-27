@@ -172,7 +172,6 @@ const validateDataRegister = () => {
     }else{
         phoneNumber.classList.remove('is-invalid');
         errPhone.innerText = '';
-        existError = false;
     }
     return existError;
 };
@@ -182,12 +181,12 @@ buttonRegisterAction.addEventListener('click', function(e) {
     const existsErrors = validateDataRegister();
     if (!existsErrors) {
         const newUser = {
-            "full_name": fullNameInput.value,
-            "phone_number" : phoneNumber.value,
+            "name": fullNameInput.value,
+            "telephone" : phoneNumber.value,
             "email": emailInput.value,
             "password": passwordConfirmInput.value
         };
-        fetch('http://localhost:3000/users', {
+        fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
