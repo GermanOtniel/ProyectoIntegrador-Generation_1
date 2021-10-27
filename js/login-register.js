@@ -195,11 +195,15 @@ buttonRegisterAction.addEventListener('click', function(e) {
         })
         .then((res) => res.json())
         .then((data) =>  {
-            localStorage.setItem(
-                'userSession',
-                JSON.stringify(newUser)
-            );
-            window.location.href = '/home.html';
+            if (data) {
+                localStorage.setItem(
+                    'userSession',
+                    JSON.stringify(data)
+                );
+                window.location.href = '/home.html';
+            } else {
+                renderErrorMsg();
+            }
         })
         .catch((err) => {
             renderErrorMsg();
@@ -242,6 +246,7 @@ actionBtnLogin.addEventListener('click', function(e) {
         fetch(`http://localhost:8080/login`, {
             method: 'POST',
             headers: {
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify({
@@ -251,7 +256,6 @@ actionBtnLogin.addEventListener('click', function(e) {
         })
         .then((res) => res.json())
         .then((data) =>  {
-            console.log(data);
             if (data != null){
                 localStorage.setItem(
                     'userSession',

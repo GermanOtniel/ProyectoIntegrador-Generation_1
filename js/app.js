@@ -6,7 +6,10 @@ function addRecommendation(recommendation) {
     <div class="publicacion">
         <div class="header mb-4">
             <a class="foto" href="#">
-                <img src=${recommendation.user.profilePicture}>
+                <img src=${
+                    recommendation.user.profilePicture ||
+                    'http://cdn.onlinewebfonts.com/svg/img_568657.png'
+                }>
             </a>
             <div class="datos">
                 <a class="nombre" href="#">${recommendation.user.name}</a>
@@ -60,7 +63,8 @@ function loadRecommendations() {
     fetch('http://localhost:8080/recommendations',{
         method: "GET",
         headers: {
-             'Content-Type' : 'application/json'
+             'Content-Type' : 'application/json',
+             'Authorization': currentSession().authToken
         }
 
     })
@@ -116,15 +120,12 @@ function loadCurrentUserData() {
     const usernameList = document.getElementsByClassName('currentUserName');
     const inputPlaceholder = document.getElementById('recomm-input');
 
-    console.log(user);
-    console.log(avatarList);
-    console.log(usernameList);
-
-    [...avatarList].forEach(avatar => (avatar.src = user.profilePicture));
+    [...avatarList].forEach(avatar => (
+        avatar.src = user.profilePicture || 
+        'http://cdn.onlinewebfonts.com/svg/img_568657.png'
+    ));
     [...usernameList].forEach(uname => (uname.innerHTML = user.name));
     inputPlaceholder.placeholder = inputPlaceholder.placeholder.replace('USER_NAME', user.name.split(" ")[0])
-
-
 }
 
 function saveRecommendation() {
@@ -171,7 +172,8 @@ function saveRecommendation() {
     fetch('http://localhost:8080/recommendations', {
         method: 'POST',
         headers: {
-            'Content-Type' : 'application/json'
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
         },
         body: JSON.stringify(recommendation)
     })
@@ -302,7 +304,12 @@ function mediaSortable(){
 
 function loadCategories() {
     const selectCategory = document.getElementById('category');
-    fetch('http://localhost:8080/categories')
+    fetch('http://localhost:8080/categories', {
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
+        },
+    })
     .then((res) => res.json())
     .then((categories) => {
         categories.forEach((category) => {
