@@ -172,7 +172,6 @@ const validateDataRegister = () => {
     }else{
         phoneNumber.classList.remove('is-invalid');
         errPhone.innerText = '';
-        existError = false;
     }
     return existError;
 };
@@ -182,12 +181,12 @@ buttonRegisterAction.addEventListener('click', function(e) {
     const existsErrors = validateDataRegister();
     if (!existsErrors) {
         const newUser = {
-            "full_name": fullNameInput.value,
-            "phone_number" : phoneNumber.value,
+            "name": fullNameInput.value,
+            "telephone" : phoneNumber.value,
             "email": emailInput.value,
             "password": passwordConfirmInput.value
         };
-        fetch('http://localhost:3000/users', {
+        fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -196,11 +195,15 @@ buttonRegisterAction.addEventListener('click', function(e) {
         })
         .then((res) => res.json())
         .then((data) =>  {
-            localStorage.setItem(
-                'userSession',
-                JSON.stringify(newUser)
-            );
-            window.location.href = '/home.html';
+            if (data) {
+                localStorage.setItem(
+                    'userSession',
+                    JSON.stringify(data)
+                );
+                window.location.href = '/home.html';
+            } else {
+                renderErrorMsg();
+            }
         })
         .catch((err) => {
             renderErrorMsg();
@@ -240,31 +243,32 @@ actionBtnLogin.addEventListener('click', function(e) {
     e.preventDefault();
     const existsErrors = validateDataLogin();
     if (!existsErrors) {
-        fetch(`http://localhost:3000/users?email=${emailLogin.value}`, {
-            method: 'GET',
+        fetch(`http://localhost:8080/login`, {
+            method: 'POST',
             headers: {
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type' : 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                email: emailLogin.value,
+                password: passwordLogin.value
+            })
         })
         .then((res) => res.json())
         .then((data) =>  {
-            if (data.length > 0) {
-                if (checkCorrectPassword(passwordLogin.value, data[0]['password'])) {
-                    localStorage.setItem(
-                        'userSession',
-                        JSON.stringify(data[0])
-                    );
-                    window.location.href = '/home.html';
-                } else {
-                    emailLogin.classList.add('is-invalid');
-                    textErrorEmailLogin.innerText = 'Las credenciales son inválidas';
-                    passwordLogin.classList.add('is-invalid');
-                    textErrorPassLogin.innerText = 'Las credenciales son inválidas';
-                }
+            if (data != null){
+                localStorage.setItem(
+                    'userSession',
+                    JSON.stringify(data)
+                );
+                window.location.href = '/home.html';
+
             }
-            if (data.length === 0) {
+            else {
                 emailLogin.classList.add('is-invalid');
-                textErrorEmailLogin.innerText = 'El correo electrónico ingresado aún no ha sido registrado';
+                textErrorEmailLogin.innerText = 'Las credenciales son inválidas';
+                passwordLogin.classList.add('is-invalid');
+                textErrorPassLogin.innerText = 'Las credenciales son inválidas';
             }
         })
         .catch((err) => {

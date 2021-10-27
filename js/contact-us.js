@@ -98,7 +98,7 @@ function sendData(event) {
 
     disableSendMailButton(event.target);
 
-    fetch("http://127.0.0.1:3000/contact-us", {
+    fetch("https://travellymailer.herokuapp.com/contact-us", {
         method: "POST",
         headers: {
             "Content-Type" : 'application/json'
