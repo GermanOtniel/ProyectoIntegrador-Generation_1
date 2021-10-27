@@ -50,7 +50,7 @@ function addRecommendation(recommendation) {
             </button>
         </div>
         <div class="d-grid gap-2 mt-1">
-        <button onclick="getRecommendationData('${recommendation.id}')" class="btn btn-primary travelly-primary-action" type="button">Conoce más</button>
+        <button onclick="getRecommendationData('${recommendation.recommID}')" class="btn btn-primary travelly-primary-action" type="button">Conoce más</button>
         </div>
     </div>
     `;
@@ -60,21 +60,29 @@ function addRecommendation(recommendation) {
 
 const getRecommendationData = (recommId) => {
     const modalButton = document.getElementById('knowMoreButton');
-    fetch(`http://localhost:3000/recommendations?id=${recommId}`)
+    fetch(`http://localhost:8080/recommendations/${recommId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
+        },
+    })
     .then((res) => res.json())
     .then((data) => {
-        if (data && data.length > 0) {
-            const recommendation = data[0];
+        if (data) {
+            const recommendation = data;
             const bodyModal = document.getElementById('knowMoreBodyModal');
             bodyModal.innerHTML = `
             <div>
                 <h4>${recommendation.location}</h4>
-                <p>
-                    ${recommendation.userName + ' (' + getDateOfRecommendation(recommendation.createdAt) + ')'}
+                <p class='mb-1'>
+                    ${recommendation.user.name + ' (' + getDateOfRecommendation(recommendation.createdAt) + ')'}
                 </p>
+                <h5><span class="badge bg-secondary">${recommendation.category.name}</span></h5>
                 <small>
-                    ${recommendation.recommendationText}
+                    ${recommendation.text}
                 </small>
+                <br/><br/>
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         ${ recommendation.uploadedMedia.map((media, i) => (
@@ -87,7 +95,7 @@ const getRecommendationData = (recommId) => {
                         ${ recommendation.uploadedMedia.map((media, i) => (
                             `
                                 <div class="${i === 0 ? "carousel-item active" : "carousel-item"}">
-                                    <img src=${media} class="d-block w-100" alt=${'Archivo #' + (i + 1)}>
+                                    <img src=${media.content} class="d-block w-100" alt=${'Archivo #' + (i + 1)}>
                                 </div>
                             `
                         )) }
@@ -104,7 +112,6 @@ const getRecommendationData = (recommId) => {
                 </div>
             </div>
             `;
-            console.log(data);
         }
     })
     .catch((err) => console.log(err))
@@ -130,15 +137,9 @@ function loadRecommendations() {
     })
     .then((res) => res.json())
     .then((data) => {
-        console.log (data);
         data.forEach((recommendation) =>{
             addRecommendation(recommendation);
         }) 
-        // data.sort((a,b) => {
-        //     return new Date(b.createdAt) - new Date(a.createdAt);
-        // }).forEach(recommendation => {
-        //     addRecommendation(recommendation);
-        // });
     })
     .catch((err) => console.log(err))
 }
@@ -378,3 +379,116 @@ function loadCategories() {
     })
     .catch((err) => console.log(err))
 }
+
+const btnOpenModal = document.getElementsByClassName('profile-open-modal');
+const editProfileImgBtn = document.getElementById('edit-profile-img');
+const inputHiddenUpload = document.getElementById('edit-profile-upload');
+const saveEditProfile = document.getElementById('save-edit-profile');
+let editProfileName = document.getElementById('edit-profile-name');
+let editProfileAbMe = document.getElementById('edit-profile-abMe');
+let editProfilePhone = document.getElementById('edit-profile-phone');
+let editProfileBirthday = document.getElementById('edit-profile-birthday');
+let editProfileShowImg = document.getElementById('edit-profile-showimg');
+let errorNameEditText = document.getElementById('error-name-edit');
+let errorNamePhoneText = document.getElementById('error-name-phone');
+
+function renderImageUploaded(elementImg, mediaFile){
+    let mediaScanner = new FileReader();
+    mediaScanner.onload = function () {
+        elementImg.src = mediaScanner.result;
+    }
+    mediaScanner.readAsDataURL(mediaFile);
+}
+
+btnOpenModal[0].addEventListener('click', function(e) {
+    const user = currentSession();
+    editProfileName.value = user.name;
+    if (user.aboutMe) {
+        editProfileAbMe.value = user.aboutMe;
+    }
+    editProfilePhone.value = user.telephone;
+    editProfileBirthday.value = user.birthday ? user.birthday.slice(0,10) : '';
+    editProfileShowImg.src =user.profilePicture || 
+        'http://cdn.onlinewebfonts.com/svg/img_568657.png';
+});
+
+editProfileImgBtn.addEventListener('click', function(e) {
+    inputHiddenUpload.click();
+});
+
+inputHiddenUpload.addEventListener('change', function(e) {
+    if (e.target.files.length > 0) {
+        renderImageUploaded(editProfileShowImg, e.target.files[0]);
+    }
+});
+
+const editProfileValidations = () => {
+    let existError = false;
+
+    if (!validateName(editProfileName.value)) {
+        existError = true;
+        errorNameEditText.innerText = 'El campo nombre no es válido';
+        errorNameEditText.classList.add('text-danger');
+        editProfileName.classList.add('form-control');
+        editProfileName.style.border = '1px solid red';
+        editProfileName.style.width = '90%';
+        editProfileName.placeholder = 'Agrega tu nombre completo';
+    } else {
+        errorNameEditText.innerText = '';
+        errorNameEditText.classList.remove('text-danger');
+        editProfileName.style.border = 'none';
+        editProfileName.classList.remove('form-control');
+        editProfileName.style.width = 'auto';
+        editProfileName.placeholder = '';
+    }
+    if (!validateTelephone(editProfilePhone.value)) {
+        existError = true;
+        errorNamePhoneText.innerText = 'El campo teléfono no es válido';
+        errorNamePhoneText.classList.add('text-danger');
+        editProfilePhone.style.border = '1px solid red';
+    } else {
+        errorNamePhoneText.innerText = '';
+        errorNamePhoneText.classList.remove('text-danger');
+        editProfilePhone.style.border = 'none';
+    }
+
+    return existError;
+};
+
+saveEditProfile.addEventListener('click', function() {
+    const user = currentSession();
+    const userUpdate = {
+        aboutMe: editProfileAbMe.value || '',
+        birthday: editProfileBirthday.value,
+        telephone: editProfilePhone.value,
+        name: editProfileName.value,
+        email: user.email,
+        profilePicture: editProfileShowImg.src || ''
+    };
+    if (!editProfileValidations()) {
+        fetch(`http://localhost:8080/users/${user.userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': user.authToken
+            },
+            body: JSON.stringify(userUpdate)
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data) {
+                localStorage.setItem(
+                    'userSession',
+                    JSON.stringify({
+                        ...data,
+                        authToken: user.authToken
+                    })
+                );
+                window.location.reload();
+            } else {
+                renderErrorMsg();
+            }
+        })
+        .catch(err => renderErrorMsg())
+    }
+});

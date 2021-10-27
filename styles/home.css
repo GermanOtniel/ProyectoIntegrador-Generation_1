@@ -524,3 +524,8 @@ div.is-invalid {
 	background: #010127;
 	border-color: #010127;
 }
+#edit-profile-phone {
+	width: 90% !important;
+	border: none;
+	font-weight: bold !important;
+}

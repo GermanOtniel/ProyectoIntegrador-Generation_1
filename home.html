@@ -90,7 +90,7 @@
 		<div class="contenido-principal row justify-content-evenly">
 			<aside class="enlaces-rapidos col-3 col-xl-2">
 				<nav>
-					<a data-bs-toggle="modal" data-bs-target="#profile-modal" class="perfil">
+					<a data-bs-toggle="modal" data-bs-target="#profile-modal" class="perfil profile-open-modal">
 						<img class="user-avatar"><span class="currentUserName"></span>
 					</a>
 					<a href="#">
@@ -435,9 +435,51 @@
 				<div class="modal-bodyProfile">
 					<div class="card p-3">
 						<div class="d-flex ">
-								<div class="image"> <img src="./images/integrate-project-diana.jpeg" class="imgrounded" width="155"> </div>
+								<div class="image"> 
+									<img 
+										src="http://cdn.onlinewebfonts.com/svg/img_568657.png" 
+										class="imgrounded" 
+										width="155"
+										id="edit-profile-showimg"
+									> 
+									<button 
+										style="margin-left: 20px; margin-top: 10px;" 
+										type="button" 
+										class="btn btn-secondary btn-sm"
+										id="edit-profile-img"
+									>
+										Cambiar imagen
+									</button>
+									<input type="file" class="d-none" id="edit-profile-upload">
+								</div>
 								<div class="ml-3 w-100">
-										<h4 class="mb-0 mt-0">Diana Manriquez</h4> <span>ING. Desarrollo de Software <br>Danza Polinesia <br> Me encanta estar en el <b>Bosque</b>.</span>
+										<input class="h4" id="edit-profile-name" type="text" value="Diana Manriquez" />
+										<small id="error-name-edit"></small>
+										<span>
+											<textarea 
+												style="border: none; font-weight: bold; height: 150px; font-size: 1.2rem; width: 250px;"
+												id="edit-profile-abMe" 
+												rows="5"
+												placeholder="Agrega alguna información acerca de ti..."
+											></textarea>
+										</span>
+										<br/>
+										<label>
+											<b>Número telefónico:</b>
+										</label>
+										<input 
+											id="edit-profile-phone"
+											class="form-control"
+											type="number" 
+											placeholder="Ingresa tu número telefónico"
+											value="5537225854"
+										/>
+										<small id="error-name-phone"></small>
+										<br/>
+										<label>
+											<b>Cumpleaños:</b>
+										</label><br/>
+										<input id="edit-profile-birthday" type="date" data-date-inline-picker="true" />
 										<div class="p-2 mt-3 bg-primary d-flex justify-content-between rounded text-white stats">
 												<div class="d-flex flex-column"> 
 													<span class="text-profile-numbers">Seguidores</span> <span class="numbers">128</span> 
@@ -450,7 +492,12 @@
 												</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-md btn-editProfile">Editar Perfil</button>
+											<button
+												id="save-edit-profile"
+												class="btn btn-md btn-editProfile"
+											>
+												Guardar cambios
+											</button>
 											<!-- <button class="btn btn-sm btn-outline-primary">Chat</button> <button class="btn btn-sm btn-primary ml-2">Follow</button> --> 
 											</div>
 								</div>
