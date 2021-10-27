@@ -272,3 +272,8 @@ actionBtnLogin.addEventListener('click', function(e) {
         })
     }
 });
+
+document.getElementById("navbar-button").addEventListener("click", ()=>{
+    document.querySelector("main").classList.toggle("top-margin-responsive");
+    
+})
