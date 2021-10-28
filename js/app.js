@@ -326,7 +326,18 @@ function saveRecommendation() {
     });
 }
 
+
+function verifyUserSession(){
+    const credentialUser = currentSession();
+    if(!credentialUser) return false;
+    return true;
+}
 window.addEventListener('load', () => {
+    const existUser =  verifyUserSession();
+    if(!existUser){
+        window.location.href = "/index.html";
+        return;
+    }
     /* Transferir click, desde el anchor (botón visual) de añadir imagen, al input-file (cargar imagen) */
     document.querySelector('#btn-add-image').addEventListener('click', () => {
         document.querySelector('#my-image').click();
@@ -566,3 +577,9 @@ saveEditProfile.addEventListener('click', function() {
         .catch(err => renderErrorMsg())
     }
 });
+
+const logoutButton = document.getElementById('logout-btn');
+logoutButton.addEventListener("click", function(){
+    localStorage.removeItem("userSession");
+    window.location.href = "/index.html";
+})
