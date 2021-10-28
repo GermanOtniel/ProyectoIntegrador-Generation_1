@@ -86,7 +86,7 @@ const getComments=(recommId, openModal=true) =>{
                         
                     </div>
                 </div>`
-            ))}
+            )).join('')}
             </div>
             </div>
         </div>`
