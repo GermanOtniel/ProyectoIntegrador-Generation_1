@@ -33,7 +33,7 @@ function addRecommendation(recommendation) {
                 <i class="bi bi-heart-fill me-gusta"></i>
                 <span>${recommendation.likes.length}</span>
             </div>
-            <a href="#">${recommendation.comments.length} comentarios</a>
+            <a onclick="getComments('${recommendation.recommID}')">${recommendation.comments.length} comentarios</a>
         </div>
         <div class="botones  d-flex">
             <button class="me-gusta">
@@ -105,29 +105,30 @@ const getComments=(recommId, openModal=true) =>{
 function addComments(recommId){
 return function (){
     const commentsModal= document.getElementById('new-comment');
-    fetch(`http://localhost:8080/comments`,{
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json',
-            'Authorization': currentSession().authToken
-        },
-        body: JSON.stringify({
-            user : {
-                userId: currentSession().userId
+    if (commentsModal.value.trim() !== '') {
+        fetch(`http://localhost:8080/comments`,{
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': currentSession().authToken
             },
-            recommendationId : recommId,
-            comment : commentsModal.value
+            body: JSON.stringify({
+                user : {
+                    userId: currentSession().userId
+                },
+                recommendationId : recommId,
+                comment : commentsModal.value
+            })
         })
-    })
-    .catch((err) =>{
-        console.log(err)
-    })
-    .finally(()=>{
-        getComments(recommId,false);
-        commentsModal.value='';
-
-    })    
+        .catch((err) =>{
+            console.log(err)
+        })
+        .finally(()=>{
+            getComments(recommId,false);
+            commentsModal.value='';
     
+        })  
+    }  
 };
 }
 
