@@ -77,7 +77,7 @@ const getComments=(recommId, openModal=true) =>{
                `<div class="p-3 comment-card" >
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="user d-flex flex-row align-items-center"> 
-                        <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">${comment.user.name}</small>
+                        <img src=${comment.user.profilePicture} width="30" class="user-img rounded-circle mr-2" style="margin-right:10px;"> <span><small class="font-weight-bold text-primary ml-2">${comment.user.name}</small>
                         </div>
                     </div>
                     <small>${getDateOfRecommendation(comment.createdAt)}</small>
@@ -156,7 +156,7 @@ const getRecommendationData = (recommId) => {
                 <small>
                     ${recommendation.text}
                 </small>
-                <br/><br/>
+                <br/>
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         ${ recommendation.uploadedMedia.map((media, i) => (
@@ -313,10 +313,12 @@ function saveRecommendation() {
         body: JSON.stringify(recommendation)
     })
     .then((res) => res.json())
-    .then((data) =>  msgToShow = msgOK)
+    .then((data) =>  {
+        msgToShow = msgOK;
+        window.location.reload();
+    })
     .catch((err) => {
         msgToShow = msgError
-        console.log(err)
     })
     .finally(() => {
         const toast = new bootstrap.Toast(msgToShow);

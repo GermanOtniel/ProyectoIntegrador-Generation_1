@@ -256,19 +256,18 @@ actionBtnLogin.addEventListener('click', function(e) {
         })
         .then((res) => res.json())
         .then((data) =>  {
-            if (data != null){
+            if (data.error){
+                emailLogin.classList.add('is-invalid');
+                textErrorEmailLogin.innerText = data.message;
+                passwordLogin.classList.add('is-invalid');
+                textErrorPassLogin.innerText = data.message;
+            }
+            else {
                 localStorage.setItem(
                     'userSession',
                     JSON.stringify(data)
                 );
                 window.location.href = '/home.html';
-
-            }
-            else {
-                emailLogin.classList.add('is-invalid');
-                textErrorEmailLogin.innerText = 'Las credenciales son inválidas';
-                passwordLogin.classList.add('is-invalid');
-                textErrorPassLogin.innerText = 'Las credenciales son inválidas';
             }
         })
         .catch((err) => {
