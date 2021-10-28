@@ -40,11 +40,11 @@ function addRecommendation(recommendation) {
                 <i class="bi bi-hand-thumbs-up me-2"></i>
                 Me gusta
             </button>
-            <button class="comentar">
+            <button onclick="getComments('${recommendation.recommID}')"class="comentar">
                 <i class="bi bi-chat-left me-2"></i>
                 Comentar
             </button>
-            <button class="comentar">
+            <button class="compartir">
                 <i class="bi bi-share me-2"></i>
                 Compartir
             </button>
@@ -56,6 +56,79 @@ function addRecommendation(recommendation) {
     `;
     const recommendationSection = document.querySelector(".publicaciones");
     recommendationSection.innerHTML += newRecommendation;
+}
+const getComments=(recommId, openModal=true) =>{
+    const commentsModal= document.getElementById('commentsButton');
+    fetch(`http://localhost:8080/recommendations/${recommId}/comments`,{
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
+        },
+    })
+    .then((res) => res.json())
+    .then((comments) => {
+        const modalComments= document.querySelector('#comments-modal .modal-body');
+        modalComments.innerHTML=`
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+            <div class="col">
+            ${ comments.map((comment, i) => (
+               `<div class="p-3 comment-card" >
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="user d-flex flex-row align-items-center"> 
+                        <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">${comment.user.name}</small>
+                        </div>
+                    </div>
+                    <small>${getDateOfRecommendation(comment.createdAt)}</small>
+                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                        <small class="font-weight-bold">${comment.comment}</small></span> 
+                        
+                    </div>
+                </div>`
+            ))}
+            </div>
+            </div>
+        </div>`
+
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+        if (openModal){
+            commentsModal.click();
+        }
+        document.getElementById('send-comment').onclick=addComments(recommId);
+    });
+
+}
+
+function addComments(recommId){
+return function (){
+    const commentsModal= document.getElementById('new-comment');
+    fetch(`http://localhost:8080/comments`,{
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
+        },
+        body: JSON.stringify({
+            user : {
+                userId: currentSession().userId
+            },
+            recommendationId : recommId,
+            comment : commentsModal.value
+        })
+    })
+    .catch((err) =>{
+        console.log(err)
+    })
+    .finally(()=>{
+        getComments(recommId,false);
+        commentsModal.value='';
+
+    })    
+    
+};
 }
 
 const getRecommendationData = (recommId) => {

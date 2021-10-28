@@ -424,6 +424,33 @@
 		</div>
 	</div>
 
+<button id="commentsButton" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#comments-modal"></button>
+
+	<!-- Modal Comments -->
+
+<div class="modal fade" id="comments-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header bg-navbar text-color-base">
+		  <h5 class="modal-title" id="exampleModalLabel">Comentarios</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+		</div>
+		<div class="modal-body">
+		  
+		</div>
+		<div class="modal-footer">
+			<div class="comment-text w-100">
+                <div class="input-group mb-3">
+                  <input id="new-comment"type="text" class="form-control" placeholder="Comentario" aria-label="Recipient's username" aria-describedby="button-addon2">
+                  <button class="btn btn-outline-secondary" type="button" id="send-comment">Enviar</button>
+                </div>
+            </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+
 	<!--Modal Profile-->
 	<div class="modal fade" id="profile-modal" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable">

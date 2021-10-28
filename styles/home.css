@@ -453,7 +453,8 @@ main .publicacion .botones button svg {
 
 #chat-modal .btn-close,
 #newRecommendationModal .btn-close,
-#profile-modal .btn-close {
+#profile-modal .btn-close,
+#comments-modal .btn-close {
 	background: none;
 	color: inherit;
 }
@@ -503,6 +504,8 @@ div.is-invalid {
 .imgrounded {
 	border-radius: 100%;
 	margin-right: 30px;
+	min-width: 155px;
+	min-height: 145px;
 }
 .modal-bodyProfile {
 	position: relative;
@@ -528,4 +531,10 @@ div.is-invalid {
 	width: 90% !important;
 	border: none;
 	font-weight: bold !important;
+}
+
+#comments-modal .comment-card{
+    border: none;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    border-radius: 4px
 }
