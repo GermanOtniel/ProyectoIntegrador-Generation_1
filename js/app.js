@@ -15,8 +15,74 @@ function checkLikes(likesList){
     return false;
 }
 
-function addRecommendation(recommendation) {  
+function hitLike(recommId) {
+    const currentUserId = currentSession().userId;
 
+    fetch(`http://localhost:8080/likes`, {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
+        },
+        body: JSON.stringify({
+            userId: currentUserId,
+            recommendationId: recommId
+        })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        const likeIndicator = document.getElementById(`recomm-${recommId}`);
+        const likeButton = document.getElementById(`btn-like-${recommId}`);
+        /* actualizar indicador de like a un corazón relleno */
+        likeIndicator.classList.remove('bi-heart');
+        likeIndicator.classList.add('bi-heart-fill');
+        /* cambiar el evento de click del botón de like */
+        likeButton.onclick = hitUnLikeClosure(recommId);
+    })
+    .catch((err) => console.log(err))
+}
+
+function hitUnlike(recommId) {
+    const currentUserId = currentSession().userId;
+
+    fetch(`http://localhost:8080/likes/user/${currentUserId}/recommendation/${recommId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
+        },
+        body: JSON.stringify({
+            userId: currentUserId,
+            recommendationId: recommId
+        })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        const likeIndicator = document.getElementById(`recomm-${recommId}`);
+        const likeButton = document.getElementById(`btn-like-${recommId}`);
+        /* actualizar indicador de like a un corazón vacío */
+        likeIndicator.classList.remove('bi-heart-fill');
+        likeIndicator.classList.add('bi-heart');
+        /* cambiar el evento de dislike a like */
+        likeButton.onclick = hitLikeClosure(recommId);
+    })
+    .catch((err) => console.log(err))
+}
+
+function hitUnLikeClosure(recommId) {
+  return function() {
+    hitUnlike(recommId);
+  }
+}
+
+function hitLikeClosure(recommId) {
+  return function() {
+    hitLike(recommId);
+  }
+}
+
+function addRecommendation(recommendation) {  
+  const userLikedThis = checkLikes(recommendation.likes);
   const newRecommendation = `
     <div class="publicacion">
         <div class="header mb-4">
@@ -40,13 +106,13 @@ function addRecommendation(recommendation) {
         </div>
         <div class="comentarios d-flex justify-content-between">
             <div class="me-gusta d-flex justify-content-start align-items-center">
-                <i class="bi ${checkLikes(recommendation.likes) ? "bi-heart-fill": "bi-heart"} me-gusta"></i>
+                <i class="bi ${userLikedThis ? "bi-heart-fill": "bi-heart"} me-gusta" id="recomm-${recommendation.recommID}"></i>
                 <span>${recommendation.likes.length}</span>
             </div>
             <a onclick="getComments('${recommendation.recommID}')">${recommendation.comments.length} comentarios</a>
         </div>
         <div class="botones  d-flex">
-            <button class="me-gusta">
+            <button class="me-gusta" onclick="${ userLikedThis ? "hitUnlike" : "hitLike" }('${recommendation.recommID}')" id="btn-like-${recommendation.recommID}">
                 <i class="bi bi-hand-thumbs-up me-2"></i>
                 Me gusta
             </button>
