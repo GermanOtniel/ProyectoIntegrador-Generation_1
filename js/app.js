@@ -334,6 +334,7 @@ function verifyUserSession(){
     if(!credentialUser) return false;
     return true;
 }
+
 window.addEventListener('load', () => {
     const existUser =  verifyUserSession();
     if(!existUser){
@@ -358,6 +359,8 @@ window.addEventListener('load', () => {
 
     /* Al hacer click en cualquier elemento de nuestro formulario, se ejecuta lo siguiente */
     document.querySelector('.publicar').addEventListener('click', (event) => {
+        /* Filtrar para mostrar el modal sólo al hacer click en determinados elementos */
+        if (!event.target.dataset.openModal) return;
         /* Transferir click al botón que mostrará el modal */
         let toggleModalButton = document.getElementById('newRecommendationButton'); // este es el botón
         toggleModalButton.click();
