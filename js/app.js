@@ -1,10 +1,24 @@
+/**
+ * Opciones para dar formato a una fecha, utilizando los campos año, mes y día
+ */
 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
+/**
+ * Devuelve una fecha con el formato '{dia} de {mes} de {año}'
+ * Ej: 10 de Octubre de 2021
+ * @param {Date} date
+ * @returns String
+ */
 function getDateOfRecommendation(date) {
     const dateRecom = new Date(date).toLocaleDateString('es-MX', dateOptions);
     return dateRecom;
 };
 
+/**
+ * Verifica si el usuario con la sesión actualmente activa le ha dado o no like a una recomendación
+ * @param {Array} likesList - Lista con usuarios que le han dado like a la recomendación
+ * @returns Boolean
+ */
 function checkLikes(likesList){
     const currentUserId = currentSession().userId;
     for(let likes of likesList){
@@ -15,6 +29,10 @@ function checkLikes(likesList){
     return false;
 }
 
+/**
+ * Realiza una petición POST al backend para añadir un registro de like, con el usuario actual y la recomendación en cuestión
+ * @param {Integer} recommId
+ */
 function hitLike(recommId) {
     const currentUserId = currentSession().userId;
 
@@ -44,6 +62,10 @@ function hitLike(recommId) {
     .catch((err) => console.log(err))
 }
 
+/**
+ * Realiza una petición DELETE al backend para eliminar un registro de like
+ * @param {Integer} recommId
+ */
 function hitUnlike(recommId) {
     const currentUserId = currentSession().userId;
 
@@ -73,21 +95,37 @@ function hitUnlike(recommId) {
     .catch((err) => console.log(err))
 }
 
+/**
+ * Closure. Nos permite añadir una función que recibe un parámetro en un eventlistener
+ * @param {Integer} recommId
+ * @returns function
+ */
 function hitUnLikeClosure(recommId) {
   return function() {
     hitUnlike(recommId);
   }
 }
 
+/**
+ * Closure. Nos permite añadir una función que recibe un parámetro en un eventlistener
+ * @param {Integer} recommId
+ * @returns function
+ */
 function hitLikeClosure(recommId) {
   return function() {
     hitLike(recommId);
   }
 }
 
-function addRecommendation(recommendation) {  
-  const userLikedThis = checkLikes(recommendation.likes);
-  const newRecommendation = `
+/**
+ * Añade una recomendación a nuestro feed, en la página principal.
+ * @param {Object} recommendation - Contiene los datos de nuestra recomendación
+ */
+function addRecommendation(recommendation) {
+    /* Verificar si el usuario le ha dado like a esta recomendación */
+    const userLikedThis = checkLikes(recommendation.likes);
+    /* Crear una cadena en html con los datos de nuestra recomendación */
+    const newRecommendation = `
     <div class="publicacion">
         <div class="header mb-4">
             <a class="foto" href="#">
@@ -134,9 +172,19 @@ function addRecommendation(recommendation) {
         </div>
     </div>
     `;
+
+    /* Seleccionar el contenedor principal, dónde vamos a añadir las recomendaciones */
     const recommendationSection = document.querySelector(".publicaciones");
+
+    /* Añadir nuestra recomendación al contenedor anterior*/
     recommendationSection.innerHTML += newRecommendation;
 }
+
+/**
+ * Obtiene y muestra los comentarios efectuados en una recomendación dada.
+ * @param {Integer} recommId
+ * @param {Boolean} openModal - desplegar o no el modal, al ejecutar esta función.
+ */
 const getComments=(recommId, openModal=true) =>{
     const commentsModal= document.getElementById('commentsButton');
     fetch(`http://localhost:8080/recommendations/${recommId}/comments`,{
@@ -154,7 +202,7 @@ const getComments=(recommId, openModal=true) =>{
             <div class="row d-flex justify-content-center">
             <div class="col">
             ${ comments.map((comment, i) => (
-               `<div class="p-3 comment-card" >
+                `<div class="p-3 comment-card" >
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="user d-flex flex-row align-items-center"> 
                         <img src=${comment.user.profilePicture} width="30" class="user-img rounded-circle mr-2" style="margin-right:10px;"> <span><small class="font-weight-bold text-primary ml-2">${comment.user.name}</small>
@@ -177,14 +225,29 @@ const getComments=(recommId, openModal=true) =>{
         if (openModal){
             commentsModal.click();
         }
-        document.getElementById('send-comment').onclick=addComments(recommId);
+        document.getElementById('send-comment').onclick=addCommentsClosure(recommId);
     });
 
 }
 
+/**
+ * Closure. Nos permite utilizar una función con parámetros, en un event listener.
+ * @param {Integer} recommId 
+ * @returns function
+ */
+function addCommentsClosure(recommId) {
+    return function() {
+        addComments(recommId);
+    }
+}
+
+/**
+ * Añadir un nuevo comentario a una recomendación.
+ * @param {Integer} recommId 
+ */
 function addComments(recommId){
-return function (){
     const commentsModal= document.getElementById('new-comment');
+    /* Si no es un comentario vacío, realiza una petición POST para la creación del comentario en la recomendación */
     if (commentsModal.value.trim() !== '') {
         fetch(`http://localhost:8080/comments`,{
             method: 'POST',
@@ -200,20 +263,26 @@ return function (){
                 comment : commentsModal.value
             })
         })
-        .catch((err) =>{
+        .catch((err) => {
             console.log(err)
         })
-        .finally(()=>{
-            getComments(recommId,false);
+        .finally(() => {
+            /* Actualizar comentarios */
+            getComments(recommId, false);
+            /* Limpiar campo de texto del nuevo comentario */
             commentsModal.value='';
     
         })  
     }  
-};
 }
 
+/**
+ * Obtiene y despliega información detallada de una recomendación
+ * @param {Integer} recommId 
+ */
 const getRecommendationData = (recommId) => {
     const modalButton = document.getElementById('knowMoreButton');
+    /* Realiza una petición al backend para obtener los datos de una recomendación */
     fetch(`http://localhost:8080/recommendations/${recommId}`, {
         method: 'GET',
         headers: {
@@ -223,6 +292,7 @@ const getRecommendationData = (recommId) => {
     })
     .then((res) => res.json())
     .then((data) => {
+        /* Si es una recomendación que si se encuentra en nuestra base de datos, se despliega un modal con su información */
         if (data) {
             const recommendation = data;
             const bodyModal = document.getElementById('knowMoreBodyModal');
@@ -275,22 +345,20 @@ const getRecommendationData = (recommId) => {
 };
 
 /**
- * -- Instalar globalmente JSON SERVER --
- * npm install -g json-server
- * -- Iniciar JSON SERVER, con nuestro archivo .json
- * json-server --watch db/recommendations.json
+ * Obtener una lista con las recomendaciones para mostrar en el feed de la página principal.
  */
 function loadRecommendations() {
     fetch('http://localhost:8080/recommendations',{
         method: "GET",
         headers: {
-             'Content-Type' : 'application/json',
-             'Authorization': currentSession().authToken
+            'Content-Type' : 'application/json',
+            'Authorization': currentSession().authToken
         }
 
     })
     .then((res) => res.json())
     .then((data) => {
+        /* Añadir cada recomendación a nuestra página (HTML) */
         data.forEach((recommendation) =>{
             addRecommendation(recommendation);
         }) 
@@ -298,15 +366,28 @@ function loadRecommendations() {
     .catch((err) => console.log(err))
 }
 
+/**
+ * Añadir un event listener cuando se dé click en el botón para publicar recomendación
+ */
 function onSaveRecommendationClicked() {
     document.getElementById('save-recommendation').addEventListener('click', saveRecommendation);
 }
 
+/**
+ * Validar los campos requeridos para la creación de una recomendación.
+ * Se verifica que estos no estén vacíos.
+ * 
+ * @param {Object} textSm - input[type="text"] con el resumen de la recomendación
+ * @param {Object} location - input[type="text"] con la ubicación que se recomienda
+ * @param {Object} category - select con la categoría seleccionada
+ * @returns Boolean
+ */
 function validateNewRecommendationForm(textSm, location, category) {
     const textContainer = document.querySelector('#recommendation-text+div');
     let noError = true;
 
     [textSm, location, category].forEach((input) => {
+        /* Si el campo está vacío, mostrarlo con un borde rojo */
         if ( !validateMessage(input.value.trim()) ) {
             input.classList.add('is-invalid');
             noError = false;
@@ -315,7 +396,10 @@ function validateNewRecommendationForm(textSm, location, category) {
         }
     });
 
-    if ( !validateMessage(tinymce.get('recommendation-text').getContent()) ) {
+    /*
+     * Si el campo de texto enriquecido está vacío, mostrarlo con un borde rojo.
+     */
+    if ( !validateMessage(tinymce.get('recommendation-text').getContent({format: "text"}).trim()) ) {
         textContainer.classList.add('is-invalid');
         noError = false;
     } else {
@@ -325,42 +409,63 @@ function validateNewRecommendationForm(textSm, location, category) {
     return noError;
 }
 
+/**
+ * Recupera desde localStorage, el usuario con sesión iniciada
+ * @returns Object - usuario con la sesión iniciada
+ */
 function currentSession() {
     return JSON.parse(localStorage.getItem('userSession'));
 }
 
+/**
+ * Carga los datos del usuario con la sesión iniciada,
+ * en los elementos html que requieran mostrar dicha información.
+ */
 function loadCurrentUserData() {
     const user = currentSession();
+    /* Selecciona todos los elementos que requieran que se muestre la foto de perfil del usuario */
     const avatarList = document.getElementsByClassName('user-avatar');
+    /* Selecciona todos los elementos que requieran mostrar el nombre del usuario */
     const usernameList = document.getElementsByClassName('currentUserName');
+    /**
+     * Selecciona el input del formulario principal que requiere de un nombre de usuario.
+     * Aquel que dice: 'Tienes una recomendación, NOMBRE_USUARIO ?'
+     */
     const inputPlaceholder = document.getElementById('recomm-input');
 
     [...avatarList].forEach(avatar => (
+        /* Cargar la imagen de perfil, si el usuario no tiene foto se le asigna una por defecto */
         avatar.src = user.profilePicture || 
         'http://cdn.onlinewebfonts.com/svg/img_568657.png'
     ));
     [...usernameList].forEach(uname => (uname.innerHTML = user.name));
+    /* Reemplazar USER_NAME, por el nombre del usuario que actualmente tiene una sesión iniciada */
     inputPlaceholder.placeholder = inputPlaceholder.placeholder.replace('USER_NAME', user.name.split(" ")[0])
 }
 
+/**
+ * Publicar una recomendación
+ */
 function saveRecommendation() {
+    /* Mensajes de error o éxito */
     const msgOK = document.getElementById('toast-ok');
     const msgError = document.getElementById('toast-error');
     let msgToShow = null;
 
+    /* Seleccionar los campos dentro del formulario de 'nueva recomendación' */
     const recommendationSm = document.getElementById('recommendation-sm');
     const locationRec = document.querySelector("#location input");
     const category = document.getElementById("category");
-    /** validación de campos **/
 
+    /** validación de campos **/
     if (!validateNewRecommendationForm(recommendationSm, locationRec, category)) {
         return;
     }
 
-    /** crear objeto con la recomendación **/
-    const now = new Date();
+    /* Obtener usuario con la sesión activa */
     const user = currentSession();
     
+    /* Construir un arreglo (lista) con nuestros archivos de media */
     const media = [];
     document.querySelectorAll("#recommendation-media img").forEach((img)=>{
         media.push({
@@ -370,6 +475,7 @@ function saveRecommendation() {
         });
     })
 
+    /* Construir objeto con los datos de nuestra nueva recomendación */
     const recommendation = {
         user : {
             userId: user.userId
@@ -394,28 +500,50 @@ function saveRecommendation() {
     })
     .then((res) => res.json())
     .then((data) =>  {
+        /* asignar mensaje de éxito para mostrar después */
         msgToShow = msgOK;
+        /* recargar pestaña del navegador */
         window.location.reload();
     })
     .catch((err) => {
-        msgToShow = msgError
+        /* asignar mensaje de error para mostrar después */
+        msgToShow = msgError;
     })
     .finally(() => {
+        /* construir y mostrar el mensaje de éxito o error */
         const toast = new bootstrap.Toast(msgToShow);
         toast.show();
-        // reset form
+        /* limpiar todos los campos de nuestro formulario */
         document.getElementById("cancel-recommendation").click();
     });
 }
 
-
+/**
+ * Comprueba si un usuario ha iniciado sesión
+ * @returns Boolean
+ */
 function verifyUserSession(){
     const credentialUser = currentSession();
     if(!credentialUser) return false;
     return true;
 }
 
+/**
+ * Limpiar todos los campos del formulario de nueva recomendación
+ */
+function resetNewFormData() {
+    document.querySelector("#newRecommendationModal form").reset();
+    tinymce.get("recommendation-text").setContent("");
+    document.getElementById("recommendation-media").innerHTML="";
+    document.querySelectorAll('#newRecommendationModal .is-invalid').forEach(elem => elem.classList.remove('is-invalid'));
+}
+
+/**
+ * Cuando todos los elementos de la ventana han terminado de cargar,
+ * ejecutar la siguiente secuencia de instrucciones.
+ */
 window.addEventListener('load', () => {
+    /* Si no existe un usuario con sesión activa, redireccionar al login */
     const existUser =  verifyUserSession();
     if(!existUser){
         window.location.href = "/index.html";
@@ -426,21 +554,19 @@ window.addEventListener('load', () => {
         document.querySelector('#my-image').click();
     })
 
+    /* Transferir click, desde el anchor (botón visual) de añadir video, al input-file (cargar video) */
     document.querySelector('#btn-add-video').addEventListener('click', () => {
         document.querySelector('#my-video').click();
     })
 
-    document.getElementById("cancel-recommendation").addEventListener('click',()=>{
-        document.querySelector("#newRecommendationModal form").reset();
-        tinymce.get("recommendation-text").setContent("");
-        document.getElementById("recommendation-media").innerHTML="";
-
-    })
+    /* Limpiar los campos del formulario de creación de nueva recomendación, al cerrar el formulario */
+    document.getElementById("newRecommendationModal").addEventListener('hidden.bs.modal', resetNewFormData);
 
     /* Al hacer click en cualquier elemento de nuestro formulario, se ejecuta lo siguiente */
     document.querySelector('.publicar').addEventListener('click', (event) => {
         /* Filtrar para mostrar el modal sólo al hacer click en determinados elementos */
         if (!event.target.dataset.openModal) return;
+
         /* Transferir click al botón que mostrará el modal */
         let toggleModalButton = document.getElementById('newRecommendationButton'); // este es el botón
         toggleModalButton.click();
@@ -466,20 +592,24 @@ window.addEventListener('load', () => {
     /* Event Listener para publicar recomendación */
     onSaveRecommendationClicked();
 
-    /* Cargar recomendaciones */
+    /* Cargar recomendaciones, categorías y datos de usuario con sesión activa */
     loadCurrentUserData();
     loadCategories();
     loadRecommendations();
 
-    /*Texto enriquecido modal recomendaciones */
+    /* Texto enriquecido modal recomendaciones */
     richTxt();
 
+    /* Event listener para cargar archivos de media */
     uploadedMedia();
+    /* Hacer posible que se puedan reordenar las imágenes */
     mediaSortable();
     
 });
 
-
+/**
+ * Event listener para cargar imágenes del usuario
+ */
 function uploadedMedia(){
     let mediaBtn = document.getElementById("my-image");
     let mediaContainer =document.getElementById("recommendation-media");
@@ -496,6 +626,9 @@ function uploadedMedia(){
     })
 }
 
+/**
+ * Leer archivo de media (imagen) y cargarlo en el html
+ */
 function readMedia(mediaContainer,mediaFile){
     let mediaScanner = new FileReader();
     mediaScanner.onload = function () {
@@ -507,16 +640,19 @@ function readMedia(mediaContainer,mediaFile){
     mediaScanner.readAsDataURL(mediaFile);
 }
 
+/**
+ * Configurar tiny para nuestro text-area con texto enriquecido
+ */
 function richTxt(){
     tinymce.init({
         selector: '#recommendation-text',
         menubar: false,
-    plugins: [
-      'advlist image lists charmap hr',
-      'wordcount insertdatetime nonbreaking',
-      'table emoticons paste help'
-    ],
-    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect  forecolor backcolor | align | bullist numlist outdent indent | table | insertdatetime | emoticons charmap hr',
+        plugins: [
+            'advlist lists',
+            'wordcount nonbreaking',
+            'emoticons paste help'
+        ],
+        toolbar: 'undo redo | bold italic underline | align | bullist numlist | emoticons',
     });
 
     // Patch table not working
@@ -527,12 +663,18 @@ function richTxt(){
     })
 }
 
+/**
+ * Inicializar nuestro contenedor de imágenes, para que permita reordenarlas utilizando (drag & drop)
+ */
 function mediaSortable(){
     new Sortable(document.getElementById("recommendation-media"), {
         ghostClass: 'media-ghost'
     });
 }
 
+/**
+ * Cargar categorías en nuestro formulario de nueva recomendación
+ */
 function loadCategories() {
     const selectCategory = document.getElementById('category');
     fetch('http://localhost:8080/categories', {
@@ -592,6 +734,11 @@ inputHiddenUpload.addEventListener('change', function(e) {
     }
 });
 
+/**
+ * Comprueba si los campos de editar perfil son válidos.
+ * Se resaltan en rojo aquellos que no lo son.
+ * @returns Boolean
+ */
 const editProfileValidations = () => {
     let existError = false;
 
@@ -625,6 +772,9 @@ const editProfileValidations = () => {
     return existError;
 };
 
+/**
+ * Realizar una petición PUT al backend, para actualizar los datos del usuario
+ */
 saveEditProfile.addEventListener('click', function() {
     const user = currentSession();
     const userUpdate = {
@@ -646,6 +796,7 @@ saveEditProfile.addEventListener('click', function() {
         })
         .then((res) => res.json())
         .then((data) => {
+            /* Si fue exitosa la modificación, actualizar en locaStorage los datos del usuario */
             if (data) {
                 localStorage.setItem(
                     'userSession',
@@ -656,6 +807,7 @@ saveEditProfile.addEventListener('click', function() {
                 );
                 window.location.reload();
             } else {
+                /* En caso contrario, mostrar un mensaje de error */
                 renderErrorMsg();
             }
         })
@@ -663,6 +815,11 @@ saveEditProfile.addEventListener('click', function() {
     }
 });
 
+/**
+ * Cerrar sesión:
+ * 1. Elimina a nuestro usuario de localStorage
+ * 2. Redirige hacia el login
+ */
 const logoutButton = document.getElementById('logout-btn');
 logoutButton.addEventListener("click", function(){
     localStorage.removeItem("userSession");

@@ -88,6 +88,7 @@
 
 	<div class="container-fluid">
 		<div class="contenido-principal row justify-content-evenly">
+			<!-- Columna de la izquierda -->
 			<aside class="enlaces-rapidos col-3 col-xl-2">
 				<nav>
 					<a data-bs-toggle="modal" data-bs-target="#profile-modal" class="perfil profile-open-modal">
@@ -126,6 +127,7 @@
 				</footer>
 			</aside>
 
+			<!-- Columna central -->
 			<main class="col-12 col-sm-10 col-md-6 col-xxl-5 mx-2">
 				<div class="publicar">
 					<!-- Formulario principal -->
@@ -156,6 +158,7 @@
 				</div>
 			</main>
 
+			<!-- Columna de la derecha -->
 			<aside class="contactos col-3 col-xl-2 mt-2">
 				<div class="seccion">
 					<h3 class="titulo">Destacados</h3>
@@ -197,7 +200,7 @@
 
 	<button id="newRecommendationButton" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#newRecommendationModal"></button>
 
-		<!-- Modal -->
+	<!-- Modal Nueva Recomendación -->
 	<div class="modal fade" id="newRecommendationModal" tabindex="-1" aria-labelledby="newRecommendationLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
@@ -207,21 +210,24 @@
 				</div>
 				<div class="modal-body">
 					<form class="formulario">
-						<input id="recommendation-sm" class="form-control mt-2" type="text" placeholder="Resume tu experiencia">
-						<small class="invalid-feedback mb-2">Este campo es requerido.</small>
-						<select id="category" class="form-select mt-2" aria-label="Select category">
-							<option selected disabled value="">Selecciona alguna categoría</option>
-							<!-- <option value="Comida">Comida</option>
-							<option value="Alojamiento">Alojamiento</option>
-							<option value="Transporte">Transporte</option>
-							<option value="Recreación">Recreación</option> -->
-						</select>
-						<small class="invalid-feedback mb-2">Por favor, selecciona una categoría válida.</small>
-						<div id="location" class="autocomplete-container mt-2"></div>
-						<small class="invalid-feedback mb-2">Por favor, ingresa una ubicación.</small>
-						<!-- <input id="location" class="form-control mb-2" type="text" placeholder="Ubicación"> -->
-						<textarea class="form-control mt-2" id="recommendation-text" placeholder="Comparte tu experiencia completa"></textarea>
-						<small class="invalid-feedback mb-2">Este campo no puede estas vacío.</small>
+						<div> <!-- Resumen de la recomendación -->
+							<input id="recommendation-sm" class="form-control mt-2" type="text" placeholder="Resume tu experiencia">
+							<small class="invalid-feedback mb-2">Este campo es requerido.</small>
+						</div>
+						<div> <!-- Categoría de la recomendación -->
+							<select id="category" class="form-select mt-2" aria-label="Select category">
+								<option selected disabled value="">Selecciona alguna categoría</option>
+							</select>
+							<small class="invalid-feedback mb-2">Por favor, selecciona una categoría válida.</small>
+						</div>
+						<div> <!-- Ubicación de nueva recomendación -->
+							<div id="location" class="autocomplete-container mt-2"></div>
+							<small class="invalid-feedback mb-2">Por favor, ingresa una ubicación.</small>
+						</div>
+						<div> <!-- Texto enriquecido para la versión extensa de la recomendación -->
+							<textarea class="form-control mt-2" id="recommendation-text" placeholder="Comparte tu experiencia completa"></textarea>
+							<small class="invalid-feedback mb-2">Este campo no puede estar vacío.</small>
+						</div>
 						<div class="mt-2 text-center" id="recommendation-media"></div>
 						<hr>
 						<div class="botones d-flex">
@@ -400,7 +406,9 @@
 		</div>
 	</div>
 	
+	<!-- Contenedor para los mensajes de bootstrap (toast) -->
 	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<!-- Mensaje de éxito -->
 		<div class="toast align-items-center text-white bg-success border-0" id="toast-ok" role="alert"
 		  aria-live="assertive" aria-atomic="true">
 		  <div class="d-flex">
@@ -411,6 +419,7 @@
 			  aria-label="Close"></button>
 		  </div>
 		</div>
+		<!-- Mensaje de error -->
 		<div class="toast align-items-center text-white bg-danger border-0" id="toast-error" role="alert"
 		  aria-live="assertive" aria-atomic="true">
 		  <div class="d-flex">
@@ -425,6 +434,7 @@
 
 	<button id="knowMoreButton" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#knowMoreModal"></button>
 	
+	<!-- Modal Conoce más -->
 	<div class="modal fade" id="knowMoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
