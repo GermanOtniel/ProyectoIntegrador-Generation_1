@@ -33,9 +33,11 @@ function hitLike(recommId) {
     .then((data) => {
         const likeIndicator = document.getElementById(`recomm-${recommId}`);
         const likeButton = document.getElementById(`btn-like-${recommId}`);
+        const likesNumberSpan = document.getElementById(`likes-number-${recommId}`);
         /* actualizar indicador de like a un corazón relleno */
         likeIndicator.classList.remove('bi-heart');
         likeIndicator.classList.add('bi-heart-fill');
+        likesNumberSpan.innerText ++;
         /* cambiar el evento de click del botón de like */
         likeButton.onclick = hitUnLikeClosure(recommId);
     })
@@ -60,9 +62,11 @@ function hitUnlike(recommId) {
     .then((data) => {
         const likeIndicator = document.getElementById(`recomm-${recommId}`);
         const likeButton = document.getElementById(`btn-like-${recommId}`);
+        const likesNumberSpan = document.getElementById(`likes-number-${recommId}`);
         /* actualizar indicador de like a un corazón vacío */
         likeIndicator.classList.remove('bi-heart-fill');
         likeIndicator.classList.add('bi-heart');
+        likesNumberSpan.innerText --;
         /* cambiar el evento de dislike a like */
         likeButton.onclick = hitLikeClosure(recommId);
     })
@@ -107,7 +111,7 @@ function addRecommendation(recommendation) {
         <div class="comentarios d-flex justify-content-between">
             <div class="me-gusta d-flex justify-content-start align-items-center">
                 <i class="bi ${userLikedThis ? "bi-heart-fill": "bi-heart"} me-gusta" id="recomm-${recommendation.recommID}"></i>
-                <span>${recommendation.likes.length}</span>
+                <span id="likes-number-${recommendation.recommID}">${recommendation.likes.length}</span>
             </div>
             <a onclick="getComments('${recommendation.recommID}')">${recommendation.comments.length} comentarios</a>
         </div>
