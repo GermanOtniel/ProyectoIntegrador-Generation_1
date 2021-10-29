@@ -5,6 +5,16 @@ function getDateOfRecommendation(date) {
     return dateRecom;
 };
 
+function checkLikes(likesList){
+    const currentUserId = currentSession().userId;
+    for(let likes of likesList){
+        if (likes.userId == currentUserId){
+            return true;
+        }
+    }
+    return false;
+}
+
 function addRecommendation(recommendation) {  
 
   const newRecommendation = `
@@ -30,7 +40,7 @@ function addRecommendation(recommendation) {
         </div>
         <div class="comentarios d-flex justify-content-between">
             <div class="me-gusta d-flex justify-content-start align-items-center">
-                <i class="bi bi-heart-fill me-gusta"></i>
+                <i class="bi ${checkLikes(recommendation.likes) ? "bi-heart-fill": "bi-heart"} me-gusta"></i>
                 <span>${recommendation.likes.length}</span>
             </div>
             <a onclick="getComments('${recommendation.recommID}')">${recommendation.comments.length} comentarios</a>
